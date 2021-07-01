@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
-import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { IconButton } from "@material-ui/core";
 import { AccountCircle} from "@material-ui/icons";
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -36,14 +36,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function Header(props) {
+function Header() {
     const classes = useStyles();
-    const menuData = ['New', 'Popular', 'Upcoming'];
-    const getMenuData = menuData.map((label, key) => 
-             <Button color="primary" size="large" id={key}>
-                {label}
-            </Button>
-    )
 
     return (
         <header>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core';
-import { Button, Grid, Paper, Typography } from '@material-ui/core';
-import { Card, CardActions, CardContent, CardMedia, CardActionArea } from '@material-ui/core';
+import {  Grid, Paper, Typography } from '@material-ui/core';
+import { Card, CardContent, CardMedia } from '@material-ui/core';
 import axios from 'axios';
 
 const useGridStyles = makeStyles(({ breakpoints }) => ({
@@ -165,9 +165,9 @@ function Body() {
     }
 
     if (airData) {
-        var data = airData.slice(0, 7)
+        var adata = airData.slice(0, 7)
         content3 = 
-        data.map((datum, key) => 
+        adata.map((datum, key) => 
             <Grid item xs={12} sm={6} md={3}>
                 <CustomCard
                     classes={classes}
