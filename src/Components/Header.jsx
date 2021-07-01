@@ -50,7 +50,7 @@ function Header(props) {
             <AppBar position="static" className={classes.header}>
                 <Toolbar>
                     <Typography variant="h4" className={classes.title}>
-                        Movily
+                        Movify
                     </Typography>
                     {/*<div className={classes.menulist}>
                         {getMenuData}
