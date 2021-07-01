@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 const useCardStyles = makeStyles({
     root: {
-        width: 250,
+        width: 225,
         //minWidth: 225,
         borderRadius: 10, 
         height: 450,
@@ -47,7 +47,7 @@ const useCardStyles = makeStyles({
         border: 'none',
     },
     media: {
-        height: 375,
+        height: 337.5,
         //minHeight: 337.5,
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
@@ -168,7 +168,7 @@ function Body() {
         var adata = airData.slice(0, 7)
         content3 = 
         adata.map((datum, key) => 
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid item xs={11} sm={6} md={3}>
                 <CustomCard
                     classes={classes}
                     image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
@@ -187,7 +187,7 @@ function Body() {
                          <Typography className={styles.heading} variant="h4">
                              New Movies
                          </Typography>
-                         <Grid container classes={gridStyles} className={styles.gridList} spacing={3} wrap="nowrap">
+                         <Grid container classes={gridStyles} className={styles.gridList} spacing={4} wrap="nowrap">
                              {content1}
                          </Grid>
                      </Paper>
@@ -197,7 +197,7 @@ function Body() {
                          <Typography className={styles.heading} variant="h4">
                              Popular Series
                          </Typography>
-                         <Grid container classes={gridStyles} className={styles.gridList} spacing={3} wrap="nowrap">
+                         <Grid container classes={gridStyles} className={styles.gridList} spacing={4} wrap="nowrap">
                              {content2}
                          </Grid>
                     </Paper>
@@ -207,7 +207,7 @@ function Body() {
                         <Typography className={styles.heading} variant="h4">
                             Airing Today
                          </Typography>
-                         <Grid container classes={gridStyles} className={styles.gridList} spacing={3} wrap="nowrap">
+                         <Grid container classes={gridStyles} className={styles.gridList} spacing={4} wrap="nowrap">
                              {content3}
                          </Grid>
                     </Paper> 

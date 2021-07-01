@@ -7,16 +7,16 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        padding: '25px 35px',
+        padding: '15px 20px',
         flexGrow: 1, 
     },
     header: {
-        padding: '20px',
+        padding: '10px 5px',
         position: 'static',
         backgroundColor: '#1b1b1b', 
     },
     title: {
-        marginLeft: '40px',
+        marginLeft: '15px',
         flexGrow: 1,
         fontFamily: 'Pacifico, cursive',
         color: 'cyan', 
