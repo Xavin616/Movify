@@ -4,7 +4,22 @@
   box-sizing: border-box;
 }
 
-html, body {
+body {
   padding: 0;
   margin: 0;
+  background-color: #080808f8;
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-image: url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bestteenmovies-1612822987.jpg);
+  background-blend-mode: multiply;
+}
+
+.card-image {
+  height: auto;
+}
+
+@media (max-width: 400px) {
+  .menulist {
+    display: none;
+  }
 }

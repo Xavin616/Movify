@@ -1,1 +1,0 @@
-const menuData = ['New', 'Popular', 'Upcoming']

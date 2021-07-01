@@ -7,13 +7,12 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        padding: '20px 30px',
+        padding: '25px 35px',
         flexGrow: 1, 
     },
     header: {
-        padding: '12px',
+        padding: '20px',
         position: 'static',
-        marginBottom: '20px',
         backgroundColor: '#1b1b1b', 
     },
     title: {
@@ -40,8 +39,8 @@ const useStyles = makeStyles((theme) => ({
 function Header(props) {
     const classes = useStyles();
     const menuData = ['New', 'Popular', 'Upcoming'];
-    const getMenuData = menuData.map((label) => 
-             <Button color="primary" size="large">
+    const getMenuData = menuData.map((label, key) => 
+             <Button color="primary" size="large" id={key}>
                 {label}
             </Button>
     )
@@ -53,9 +52,9 @@ function Header(props) {
                     <Typography variant="h4" className={classes.title}>
                         Movily
                     </Typography>
-                    <div className={classes.menulist}>
+                    {/*<div className={classes.menulist}>
                         {getMenuData}
-                    </div>
+                    </div>*/}
                     <IconButton 
                         color='primary'
                     >
