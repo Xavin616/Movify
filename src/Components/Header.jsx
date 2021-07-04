@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1, 
     },
     header: {
-        padding: '10px 5px',
+        padding: '2px 5px',
         position: 'static',
         backgroundColor: '#1b1b1b',
         // eslint-disable-next-line
@@ -59,7 +59,7 @@ function Header() {
         <header>
             <AppBar position="static" className={classes.header}>
                 <Toolbar>
-                    <Typography variant="h4" className={classes.title}>
+                    <Typography variant="h5" className={classes.title}>
                         Movify
                     </Typography>
                     {/*<div className={classes.menulist}>

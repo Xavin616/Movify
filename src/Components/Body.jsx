@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     mainBody: {
         flexGrow: 1,
         width: '100%',
-        padding: '15px 30px',
+        padding: '15px 20px',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
             padding: '0px 10px',
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         height: 'auto',
-        padding: '20px 25px',
+        padding: '20px 20px',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
             padding: '20px 10px 5px 10px',
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     heading: {
         marginBottom: '10px',
         color: 'cyan',
-        fontSize: '1.6em',
+        fontSize: '1.2em',
         fontFamily: 'Source Sans Pro, sans-serif',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
@@ -49,9 +49,9 @@ const useStyles = makeStyles((theme) => ({
 
 const useCardStyles = makeStyles((theme) => ({
     root: {
-        margin: '0px 12px',
-        minWidth: 185,
-        height: 98+'%',
+        margin: '0px 8px',
+        minWidth: 162,
+        height: 96+'%',
         backgroundColor: 'transparent',
         border: 'none',
         // eslint-disable-next-line
@@ -84,12 +84,13 @@ const useCardStyles = makeStyles((theme) => ({
     },
     title: {
         marginTop: -9,
-        fontSize: '1em',
+        fontSize: '0.8em',
         fontWeight: 'bolder',
         fontFamily: 'Source Sans Pro, sans-serif',
         padding: 0,
     },
     date: {
+        fontSize: '0.8em',
         marginTop: 5,
     }
 
