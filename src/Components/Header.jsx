@@ -13,13 +13,23 @@ const useStyles = makeStyles((theme) => ({
     header: {
         padding: '10px 5px',
         position: 'static',
-        backgroundColor: '#1b1b1b', 
+        backgroundColor: '#1b1b1b',
+        // eslint-disable-next-line
+        ['@media (max-width:400px)']: {
+            padding: 0,
+        },
     },
     title: {
-        marginLeft: '15px',
         flexGrow: 1,
+        marginLeft: '15px',
         fontFamily: 'Pacifico, cursive',
-        color: 'cyan', 
+        color: 'cyan',
+        // eslint-disable-next-line
+        ['@media (max-width:400px)']: {
+            margin: 'auto auto',
+            textAlign: 'center',
+            fontSize: '1.5em',
+        },
     },
     button: {
         color: 'cyan',
@@ -31,6 +41,12 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 0,
         marginRight: '100px',
         fontSize: '2rem',
+    },
+    icons: {
+        // eslint-disable-next-line
+        ['@media (max-width:400px)']: {
+            display: 'none',
+        },
     }
 }))
 
@@ -49,13 +65,15 @@ function Header() {
                     {/*<div className={classes.menulist}>
                         {getMenuData}
                     </div>*/}
-                    <IconButton 
+                    <IconButton
+                        className={classes.icons} 
                         color='primary'
                     >
                         <NotificationsIcon 
                         fontSize='large'/>
                     </IconButton>
                     <IconButton 
+                        className={classes.icons}
                         color='primary'
                     >
                         <AccountCircle 

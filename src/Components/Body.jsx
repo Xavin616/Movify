@@ -1,97 +1,110 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core';
-import {  Grid, Paper, Typography } from '@material-ui/core';
-import { Card, CardContent, CardMedia } from '@material-ui/core';
+import {  Grid, Paper, Typography, Box } from '@material-ui/core';
+import CustomCard from './Subcomponents/CustomCard';
 import axios from 'axios';
-
-const useGridStyles = makeStyles(({ breakpoints }) => ({
-    root: {
-      [breakpoints.up('md')]: {
-        justifyContent: 'center',
-      },
-    },
-  }));
+//import { ChevronRight } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     mainBody: {
         flexGrow: 1,
         width: '100%',
         padding: '15px 30px',
+        // eslint-disable-next-line
+        ['@media (max-width: 450px)']:{
+            padding: '0px 10px',
+        },
         display: 'flex',
         flexDirection: 'column',
     },
     paper: {
-        height: '100%',
-        padding: '30px',
-        backgroundColor: '#0d0d0dcc',
+        height: 'auto',
+        padding: '20px 25px',
+        // eslint-disable-next-line
+        ['@media (max-width: 450px)']:{
+            padding: '20px 10px 5px 10px',
+        },
+        backgroundColor: '#0d0d0dde',
+        overflow: 'hidden',
     },
     heading: {
-        marginBottom: '20px',
+        marginBottom: '10px',
         color: 'cyan',
-        fontSize: '2em',
-        fontFamily: 'Big Shoulders Stencil Display, cursive',
+        fontSize: '1.6em',
+        fontFamily: 'Source Sans Pro, sans-serif',
+        // eslint-disable-next-line
+        ['@media (max-width:400px)']: {
+            fontSize: '1.2em',
+        },
+        
     },
     gridList: {
-        overflowX: 'scroll',
+        width: 100 + '%',
+        height: 'max-content',
+        display: 'flex',
         padding: '0px 5px',
+        overflow: 'scroll hidden',
     }
 }))
 
-const useCardStyles = makeStyles({
+const useCardStyles = makeStyles((theme) => ({
     root: {
-        width: 225,
-        //minWidth: 225,
-        borderRadius: 10, 
-        height: 450,
+        margin: '0px 12px',
+        minWidth: 185,
+        height: 98+'%',
         backgroundColor: 'transparent',
         border: 'none',
+        // eslint-disable-next-line
+        ['@media (max-width:400px)']: {
+            minWidth: 130,
+            margin: '0px 5px',
+            borderRadius: 5,
+            height: 94+'%',
+        },
     },
     media: {
-        height: 337.5,
-        //minHeight: 337.5,
+        height: 'auto',
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
+        // eslint-disable-next-line
+        ['@media (max-width:400px)']: {
+            borderBottomLeftRadius: 5,
+            borderBottomRightRadius: 5,
+        },
     },
     content: {
+        padding: 15,
+        marginTop: 5, 
         backgroundColor: 'transparent',
         color: 'white',
+        // eslint-disable-next-line
+        ['@media (max-width:400px)']: {
+            fontSize: '0.8em',
+        },
     },
     title: {
-        marginTop: -4,
+        marginTop: -9,
+        fontSize: '1em',
+        fontWeight: 'bolder',
+        fontFamily: 'Source Sans Pro, sans-serif',
+        padding: 0,
     },
     date: {
-        marginTop: 0,
+        marginTop: 5,
     }
 
-})
+}));
 
-const CustomCard = ({classes, image, title, date}) => {
-    return (
-        <Card className={classes.root}>
-            <CardMedia
-                className={classes.media}
-                image={image}
-            />
-            <CardContent className={classes.content}>
-                <Typography className={classes.title} variant="h6">
-                    {title}
-                </Typography>
-                <p className={classes.date}>{date}</p>
-            </CardContent>
-        </Card>
-    );
-};
 
 function Body() {
     let content1 = null;
     let content2 = null;
     let content3 = null;
-    
-    const gridStyles = useGridStyles();
+
     const styles = useStyles()
     const classes = useCardStyles()
     
-    const url1 = "https://api.themoviedb.org/3/movie/now_playing?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1"
+    const url1 = "https://api.themoviedb.org/3/movie/popular?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1"
     const url2 = "https://api.themoviedb.org/3/tv/popular?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1"
     const url3 = "https://api.themoviedb.org/3/tv/airing_today?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1";
     
@@ -135,10 +148,10 @@ function Body() {
     }, [url3])
     
     if (newData) {
-        var datan = newData.slice(0, 7)
+        var datan = newData.slice(0, 20)
         content1 = 
         datan.map((datum, key) => 
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid item xs={9} sm={6} md={3}> 
                 <CustomCard
                     classes={classes}
                     image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
@@ -150,7 +163,7 @@ function Body() {
     }
 
     if (popData) {
-        var data = popData.slice(0, 7)
+        var data = popData.slice(0, 25)
         content2 = 
         data.map((datum, key) => 
             <Grid item xs={12} sm={6} md={3}>
@@ -165,10 +178,10 @@ function Body() {
     }
 
     if (airData) {
-        var adata = airData.slice(0, 7)
+        var adata = airData.slice(0, 25)
         content3 = 
         adata.map((datum, key) => 
-            <Grid item xs={11} sm={6} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
                 <CustomCard
                     classes={classes}
                     image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
@@ -184,12 +197,14 @@ function Body() {
              <Grid container spacing={1}>
                  <Grid item xs={12}>
                      <Paper className={styles.paper}>
-                         <Typography className={styles.heading} variant="h4">
-                             New Movies
-                         </Typography>
-                         <Grid container classes={gridStyles} className={styles.gridList} spacing={4} wrap="nowrap">
+                         <div className="header">
+                            <Typography className={styles.heading} variant="h4">
+                                New Movies
+                            </Typography>
+                         </div>
+                         <Box className={styles.gridList}>
                              {content1}
-                         </Grid>
+                         </Box>
                      </Paper>
                  </Grid>
                  <Grid item xs={12}>
@@ -197,9 +212,9 @@ function Body() {
                          <Typography className={styles.heading} variant="h4">
                              Popular Series
                          </Typography>
-                         <Grid container classes={gridStyles} className={styles.gridList} spacing={4} wrap="nowrap">
+                         <Box className={styles.gridList}>
                              {content2}
-                         </Grid>
+                         </Box>
                     </Paper>
                  </Grid>
                  <Grid item xs={12}>
@@ -207,9 +222,9 @@ function Body() {
                         <Typography className={styles.heading} variant="h4">
                             Airing Today
                          </Typography>
-                         <Grid container classes={gridStyles} className={styles.gridList} spacing={4} wrap="nowrap">
+                         <Box className={styles.gridList}>
                              {content3}
-                         </Grid>
+                         </Box>
                     </Paper> 
                  </Grid>
              </Grid>
