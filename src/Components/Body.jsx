@@ -30,7 +30,8 @@ const useStyles = makeStyles((theme) => ({
     heading: {
         marginBottom: '10px',
         color: 'cyan',
-        fontSize: '1.2em',
+        fontWeight: 'bold',
+        fontSize: '1.4em',
         fontFamily: 'Source Sans Pro, sans-serif',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
@@ -61,6 +62,11 @@ const useCardStyles = makeStyles((theme) => ({
             borderRadius: 5,
             height: 94+'%',
         },
+        transition: '1s',
+        '&:hover': {
+            cursor: 'pointer',
+            transform: 'scale(1.05)',
+        }
     },
     media: {
         height: 'auto',
@@ -84,7 +90,7 @@ const useCardStyles = makeStyles((theme) => ({
     },
     title: {
         marginTop: -9,
-        fontSize: '0.8em',
+        fontSize: '0.89em',
         fontWeight: 'bolder',
         fontFamily: 'Source Sans Pro, sans-serif',
         padding: 0,
@@ -195,7 +201,7 @@ function Body() {
 
     return (
         <div className={styles.mainBody}>
-             <Grid container spacing={1}>
+             <Grid container spacing={0}>
                  <Grid item xs={12}>
                      <Paper className={styles.paper}>
                          <div className="header">

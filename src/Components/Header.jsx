@@ -2,8 +2,9 @@ import React from "react";
 import { makeStyles } from "@material-ui/core";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { IconButton } from "@material-ui/core";
-import { AccountCircle} from "@material-ui/icons";
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import { SearchRounded } from "@material-ui/icons";
+//import NotificationsIcon from '@material-ui/icons/Notifications';
+import {BrowserRouter as Router, Link} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#1b1b1b',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
-            padding: 0,
+            padding: 2,
         },
     },
     title: {
@@ -26,8 +27,7 @@ const useStyles = makeStyles((theme) => ({
         color: 'cyan',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
-            margin: 'auto auto',
-            textAlign: 'center',
+            margin: 'auto auto auto 20px',
             fontSize: '1.5em',
         },
     },
@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '2rem',
     },
     icons: {
+        color: 'cyan', 
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
             display: 'none',
@@ -60,25 +61,20 @@ function Header() {
             <AppBar position="static" className={classes.header}>
                 <Toolbar>
                     <Typography variant="h5" className={classes.title}>
-                        Movify
+                        <Link to='/'>
+                            Movify
+                        </Link>
                     </Typography>
                     {/*<div className={classes.menulist}>
                         {getMenuData}
                     </div>*/}
-                    <IconButton
-                        className={classes.icons} 
-                        color='primary'
-                    >
-                        <NotificationsIcon 
-                        fontSize='large'/>
-                    </IconButton>
-                    <IconButton 
-                        className={classes.icons}
-                        color='primary'
-                    >
-                        <AccountCircle 
-                        fontSize='large'/>
-                    </IconButton>
+                        <Link to='/new_movies'>
+                            <IconButton
+                                className={classes.icons}
+                            >
+                                New Movies
+                            </IconButton>
+                        </Link>
                 </Toolbar>
             </AppBar>
         </header>
