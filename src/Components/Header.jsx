@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
     header: {
         padding: '2px 5px',
         position: 'static',
-        backgroundColor: '#1b1b1b',
+        backgroundColor: 'transparent',
+        boxShadow: 'none',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
             padding: 2,
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: '15px',
         fontFamily: 'Pacifico, cursive',
         color: 'cyan',
+        fontSize: '1.665em',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
             margin: 'auto auto auto 20px',
