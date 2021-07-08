@@ -3,7 +3,9 @@ import { makeStyles } from '@material-ui/core';
 import {  Grid, Paper, Typography, Box } from '@material-ui/core';
 import CustomCard from './Subcomponents/CustomCard';
 import axios from 'axios';
-//import { ChevronRight } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
+//import { ChevronRight } from '@material-ui/icons'
+
 
 const useStyles = makeStyles((theme) => ({
     mainBody: {
@@ -28,9 +30,10 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'hidden',
     },
     heading: {
+        marginLeft: 6,
         marginBottom: '10px',
         color: 'cyan',
-        fontWeight: 'bold',
+        //fontWeight: 'bold',
         fontSize: '1.4em',
         fontFamily: 'Source Sans Pro, sans-serif',
         // eslint-disable-next-line
@@ -43,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
         width: 100 + '%',
         height: 'max-content',
         display: 'flex',
-        padding: '0px 5px',
+        padding: '8px 5px 0px 5px',
         overflow: 'scroll hidden',
     }
 }))
@@ -62,7 +65,7 @@ const useCardStyles = makeStyles((theme) => ({
             borderRadius: 5,
             height: 94+'%',
         },
-        transition: '1s',
+        transition: '0.2s',
         '&:hover': {
             cursor: 'pointer',
             transform: 'scale(1.05)',
@@ -160,10 +163,12 @@ function Body() {
         datan.map((datum, key) => 
             <Grid item xs={9} sm={6} md={3}> 
                 <CustomCard
+                    type={'movie'}
                     classes={classes}
                     image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
                     title={datum.original_title}
                     date={datum.release_date}
+                    id={datum.id}
                 />
             </Grid>
         )
@@ -175,10 +180,12 @@ function Body() {
         data.map((datum, key) => 
             <Grid item xs={12} sm={6} md={3}>
                 <CustomCard
+                    type={'tv'}
                     classes={classes}
                     image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
                     title={datum.original_name}
                     date={datum.first_air_date}
+                    id={datum.id}
                 />
             </Grid>
         )
@@ -190,10 +197,12 @@ function Body() {
         adata.map((datum, key) => 
             <Grid item xs={12} sm={6} md={3}>
                 <CustomCard
+                    type={'tv'}
                     classes={classes}
                     image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
                     title={datum.original_name}
                     date={datum.first_air_date}
+                    id={datum.id}
                 />
             </Grid>
         )
@@ -201,12 +210,14 @@ function Body() {
 
     return (
         <div className={styles.mainBody}>
-             <Grid container spacing={0}>
+             <Grid container spacing={1}>
                  <Grid item xs={12}>
                      <Paper className={styles.paper}>
                          <div className="header">
                             <Typography className={styles.heading} variant="h4">
-                                New Movies
+                                <Link to="/category/movie/popular">
+                                    Popular Movies
+                                </Link>
                             </Typography>
                          </div>
                          <Box className={styles.gridList}>
@@ -217,7 +228,9 @@ function Body() {
                  <Grid item xs={12}>
                     <Paper className={styles.paper}>
                          <Typography className={styles.heading} variant="h4">
-                             Popular Series
+                            <Link to="/category/tv/popular">
+                                Popular On Tv
+                            </Link>
                          </Typography>
                          <Box className={styles.gridList}>
                              {content2}
@@ -227,7 +240,9 @@ function Body() {
                  <Grid item xs={12}>
                     <Paper className={styles.paper}>
                         <Typography className={styles.heading} variant="h4">
-                            Airing Today
+                            <Link to="/category/tv/upcoming">
+                                Airing Today on Tv
+                            </Link>
                          </Typography>
                          <Box className={styles.gridList}>
                              {content3}

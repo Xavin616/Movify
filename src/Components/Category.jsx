@@ -4,6 +4,7 @@ import { Typography, Paper, Grid } from '@material-ui/core';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import CustomCard from './Subcomponents/CustomCard';
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     mainBody: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
         color: 'white',
     },
     heading: {
-        marginBottom: 10,
+        marginBottom: 18,
         fontWeight: 'bold',
         fontSize: '1.6em',
     }
@@ -37,14 +38,14 @@ const useStyles = makeStyles((theme) => ({
 
 const useCardStyles = makeStyles((theme) => ({
     root: {
-        minWidth: 165,
-        margin: '5px 0px',
+        minWidth: 140,
+        margin: '2.5px 0px',
         backgroundColor: 'transparent',
         border: 'none',
         transition: '0.5s',
         '&:hover': {
             cursor: 'pointer',
-            transform: 'scale(1.05)',
+            transform: 'scale(1.03)',
         }
     },
     media: {
@@ -76,10 +77,12 @@ const useCardStyles = makeStyles((theme) => ({
 
 
 function Category() {
+    const { str1, str2 } = useParams();
+
     let content;
     const styles = useStyles();
     const cardstyle = useCardStyles();
-    const url = "https://api.themoviedb.org/3/movie/upcoming?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1"
+    const url = `https://api.themoviedb.org/3/${str1}/${str2}?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1`
 
     const [data, setData] = useState(null);
     useEffect(() => {
@@ -97,14 +100,24 @@ function Category() {
     if (data) {
         content = 
             data.map((datum, key) => 
-                <Grid item xs={6} sm={3} md={3}>
-                    <CustomCard 
-                        classes={cardstyle}
-                        image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
-                        title={datum.original_title}
-                        date={datum.release_date}
-                    />
-                </Grid>
+                (str1 === "movie") ?
+                    (<Grid item xs={6} sm={4} md={3} lg={2}>
+                        <CustomCard 
+                            classes={cardstyle}
+                            image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
+                            title={datum.original_title}
+                            date={datum.release_date}
+                        />
+                    </Grid>)
+                        :
+                    (<Grid item xs={6} sm={4} md={3} lg={2}>
+                        <CustomCard 
+                            classes={cardstyle}
+                            image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
+                            title={datum.original_name}
+                            date={datum.first_air_date}
+                        />
+                    </Grid>)
             )
     }
 
@@ -113,10 +126,10 @@ function Category() {
                 <Paper className={styles.paper}>
                          <div className="header">
                             <Typography className={styles.heading} variant="h4">
-                                Upcoming
+                                {str2}
                             </Typography>
                          </div>
-                         <Grid container spacing={2}>
+                         <Grid container spacing={3}>
                             {content} 
                          </Grid>
                      </Paper>

@@ -5,11 +5,11 @@ import Category from './Components/Category'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css';
 import { cyan } from '@material-ui/core/colors';
+import ItemPage from './Components/ItemPage';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from 'react-router-dom';
 
 
@@ -34,8 +34,11 @@ function App() {
               <Route exact path='/'>
                 <Body />
               </Route>
-              <Route>
+              <Route exact path="/category/:str1/:str2">
                 <Category />
+              </Route>
+              <Route exact path="/:str/:id">
+                <ItemPage />
               </Route>
             </Switch>
         </div>

@@ -2,9 +2,9 @@ import React from "react";
 import { makeStyles } from "@material-ui/core";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { IconButton } from "@material-ui/core";
-import { SearchRounded } from "@material-ui/icons";
+//import { SearchRounded } from "@material-ui/icons";
 //import NotificationsIcon from '@material-ui/icons/Notifications';
-import {BrowserRouter as Router, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -68,7 +68,7 @@ function Header() {
                     {/*<div className={classes.menulist}>
                         {getMenuData}
                     </div>*/}
-                        <Link to='/new_movies'>
+                        <Link to='/upcoming'>
                             <IconButton
                                 className={classes.icons}
                             >
