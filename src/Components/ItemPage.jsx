@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         color: white;
         background-color: #1b1b1b;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.68), rgba(0,0,0,0.77), rgba(0,0,0,0.85), rgba(0,0,0,0.89), rgba(0,0,0,0.98), rgba(0,0,0,1), rgba(0,0,0,1)) ,url(${props => props.backimage});
+        background: linear-gradient(to bottom, rgba(0,0,0,0.60), rgba(0,0,0,0.70), rgba(0,0,0,0.80), rgba(0,0,0,0.90), rgba(0,0,0,0.95), rgba(0,0,0,1), rgba(0,0,0,1)) ,url(${props => props.backimage});
         background-size: cover;
         background-repeat: no-repeat;
         background-position: top;
