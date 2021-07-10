@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     mainBody: {
         flexGrow: 1,
         width: '100%',
-        padding: '15px 20px',
+        padding: '10px 10px',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
             padding: '0px 10px',
@@ -21,18 +21,19 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         height: 'auto',
-        padding: '20px 20px',
+        padding: '15px 20px',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
-            padding: '20px 10px 5px 10px',
+            padding: '20px 10px 5px 0px',
         },
-        backgroundColor: '#0d0d0dde',
+        backgroundColor: '#060806',
         overflow: 'hidden',
     },
     heading: {
         marginLeft: 6,
         marginBottom: '10px',
-        color: 'cyan',
+        marginTop: 2,
+        color: 'white',
         //fontWeight: 'bold',
         fontSize: '1.4em',
         fontFamily: 'Source Sans Pro, sans-serif',
@@ -40,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
         ['@media (max-width:400px)']: {
             fontSize: '1.2em',
         },
+        '&:hover': {
+            color: 'cyan',
+        }
         
     },
     gridList: {
@@ -60,7 +64,7 @@ const useCardStyles = makeStyles((theme) => ({
         border: 'none',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
-            minWidth: 130,
+            minWidth: 125,
             margin: '0px 5px',
             borderRadius: 5,
             height: 94+'%',

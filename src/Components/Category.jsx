@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import CustomCard from './Subcomponents/CustomCard';
 import { useParams } from 'react-router-dom';
+import { useMediaQuery } from './Subcomponents/Query';
 
 const useStyles = makeStyles((theme) => ({
     mainBody: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '20px 20px',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
-            padding: '20px 10px 5px 10px',
+            padding: '20px 16px 5px 16px',
         },
         backgroundColor: '#0d0d0dde',
         overflow: 'hidden',
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 const useCardStyles = makeStyles((theme) => ({
     root: {
-        minWidth: 140,
+        minWidth: 50,
         margin: '2.5px 0px',
         backgroundColor: 'transparent',
         border: 'none',
@@ -77,6 +78,11 @@ const useCardStyles = makeStyles((theme) => ({
 
 
 function Category() {
+    let number;
+    let isPageSmall = useMediaQuery('(max-width: 400px)');
+
+    (isPageSmall ? number = 2 : number = 3)
+
     const { str1, str2 } = useParams();
 
     let content;
@@ -103,19 +109,23 @@ function Category() {
                 (str1 === "movie") ?
                     (<Grid item xs={6} sm={4} md={3} lg={2}>
                         <CustomCard 
+                            type={'movie'}
                             classes={cardstyle}
                             image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
                             title={datum.original_title}
                             date={datum.release_date}
+                            id={datum.id}
                         />
                     </Grid>)
                         :
-                    (<Grid item xs={6} sm={4} md={3} lg={2}>
-                        <CustomCard 
+                    (<Grid item xs={4} sm={3} md={3} lg={2}>
+                        <CustomCard
+                            type={'tv'}
                             classes={cardstyle}
                             image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
                             title={datum.original_name}
                             date={datum.first_air_date}
+                            id={datum.id}
                         />
                     </Grid>)
             )
@@ -129,7 +139,7 @@ function Category() {
                                 {str2}
                             </Typography>
                          </div>
-                         <Grid container spacing={3}>
+                         <Grid container spacing={number}>
                             {content} 
                          </Grid>
                      </Paper>

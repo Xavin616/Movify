@@ -9,13 +9,13 @@ const GlobalStyle = createGlobalStyle`
     body {
         color: white;
         background-color: #1b1b1b;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.58), rgba(0,0,0,0.68), rgba(0,0,0,0.78), rgba(0,0,0,0.86), rgba(0,0,0,0.95), rgba(0,0,0,1)) ,url(${props => props.backimage});
+        background: linear-gradient(to bottom, rgba(0,0,0,0.68), rgba(0,0,0,0.77), rgba(0,0,0,0.85), rgba(0,0,0,0.89), rgba(0,0,0,0.98), rgba(0,0,0,1), rgba(0,0,0,1)) ,url(${props => props.backimage});
         background-size: cover;
         background-repeat: no-repeat;
         background-position: top;
     }
     .makeStyles-header-2 {
-        background-color: transparent;
+        background-color: #060806;
         box-shadow: none;
         color: #1b1b1b;
     }
@@ -43,7 +43,6 @@ function ItemPage() {
 
     if (item) {
         img_url = 'https://image.tmdb.org/t/p/original' + item.backdrop_path;
-        console.log(img_url)
         content =  <p>{item.original_title}</p>
     }
 
