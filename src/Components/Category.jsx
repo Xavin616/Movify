@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         height: 'auto',
-        padding: '20px 20px',
+        padding: '20px 30px',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
             padding: '20px 16px 5px 16px',
@@ -39,8 +39,9 @@ const useStyles = makeStyles((theme) => ({
 
 const useCardStyles = makeStyles((theme) => ({
     root: {
-        minWidth: 50,
-        margin: '2.5px 0px',
+        minWidth: 80,
+        maxWidth: 175,
+        margin: '1.8px 0px',
         backgroundColor: 'transparent',
         border: 'none',
         transition: '0.5s',
@@ -81,7 +82,7 @@ function Category() {
     let number;
     let isPageSmall = useMediaQuery('(max-width: 400px)');
 
-    (isPageSmall ? number = 2 : number = 3)
+    (isPageSmall ? number = 4 : number = 4)
 
     const { str1, str2 } = useParams();
 
@@ -118,7 +119,7 @@ function Category() {
                         />
                     </Grid>)
                         :
-                    (<Grid item xs={4} sm={3} md={3} lg={2}>
+                    (<Grid item xs={6} sm={4} md={3} lg={2}>
                         <CustomCard
                             type={'tv'}
                             classes={cardstyle}

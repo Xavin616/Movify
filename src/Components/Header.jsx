@@ -88,15 +88,21 @@ function Header() {
                         </Link>
                     </Typography>
                     <div className={classes.buttongroup}>
-                        <Button size={'small'} className={classes.btn}>
-                            TV
-                        </Button>
-                        <Button size={'small'} className={classes.btn} color='secondary'>
-                            Movie
-                        </Button>
-                        <Button size={'small'} className={classes.btn}>
-                            New
-                        </Button>
+                        <Link to='/category/tv/top_rated'>
+                            <Button size={'small'} className={classes.btn}>
+                                TV
+                            </Button>
+                        </Link>
+                        <Link to='/category/movie/top_rated'>
+                            <Button size={'small'} className={classes.btn}>
+                                Movies
+                            </Button>
+                        </Link>
+                        <Link>
+                            <Button size={'small'} className={classes.btn}>
+                                New
+                            </Button>
+                        </Link>
                     </div>
                 </Toolbar>
             </AppBar>

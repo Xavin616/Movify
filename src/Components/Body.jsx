@@ -4,6 +4,7 @@ import {  Grid, Paper, Typography, Box } from '@material-ui/core';
 import CustomCard from './Subcomponents/CustomCard';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useMediaQuery } from './Subcomponents/Query';
 //import { ChevronRight } from '@material-ui/icons'
 
 
@@ -86,7 +87,7 @@ const useCardStyles = makeStyles((theme) => ({
         },
     },
     content: {
-        padding: 15,
+        padding: '15px 5px 5px 6px', 
         marginTop: 5, 
         backgroundColor: 'transparent',
         color: 'white',
@@ -111,9 +112,16 @@ const useCardStyles = makeStyles((theme) => ({
 
 
 function Body() {
-    let content1 = null;
-    let content2 = null;
-    let content3 = null;
+    let content1;
+    let content2;
+    let content3;
+    let content4;
+
+    let number;
+
+    let isPageSmall = useMediaQuery('(max-width: 400px)');
+
+    (isPageSmall ? number = 0 : number = 1)
 
     const styles = useStyles()
     const classes = useCardStyles()
@@ -121,7 +129,8 @@ function Body() {
     const url1 = "https://api.themoviedb.org/3/movie/popular?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1"
     const url2 = "https://api.themoviedb.org/3/tv/popular?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1"
     const url3 = "https://api.themoviedb.org/3/tv/airing_today?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1";
-    
+    const url4 = "https://api.themoviedb.org/3/discover/tv?api_key=546988151aeca0994227ca10917c13db&language=en-US&sort_by=popularity.desc&first_air_date.gte=2019&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_networks=213"
+
     const [newData, setNewData] = useState(null);
     useEffect(() => {
             axios.get(url1)
@@ -161,6 +170,19 @@ function Body() {
             })
     }, [url3])
     
+    const [netData, setNetData] = useState(null);
+    useEffect(() => {
+            axios.get(url4)
+                .then(response => {
+                    let datum =  response.data.results;
+                    console.log(datum)
+                    setNetData(datum)
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        }, [url4])
+
     if (newData) {
         var datan = newData.slice(0, 20)
         content1 = 
@@ -212,9 +234,26 @@ function Body() {
         )
     }
 
+    if (netData) {
+        var netdata = netData.slice(0, 25)
+        content4 = 
+        netdata.map((datum, key) => 
+            <Grid item xs={12} sm={6} md={3}>
+                <CustomCard
+                    type={'tv'}
+                    classes={classes}
+                    image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
+                    title={datum.original_name}
+                    date={datum.first_air_date}
+                    id={datum.id}
+                />
+            </Grid>
+        )
+    }
+
     return (
         <div className={styles.mainBody}>
-             <Grid container spacing={1}>
+             <Grid container spacing={number}>
                  <Grid item xs={12}>
                      <Paper className={styles.paper}>
                          <div className="header">
@@ -250,6 +289,18 @@ function Body() {
                          </Typography>
                          <Box className={styles.gridList}>
                              {content3}
+                         </Box>
+                    </Paper> 
+                 </Grid>
+                 <Grid item xs={12}>
+                    <Paper className={styles.paper}>
+                        <Typography className={styles.heading} variant="h4">
+                            <Link to="/category/tv/upcoming">
+                                Hot off Netflix
+                            </Link>
+                         </Typography>
+                         <Box className={styles.gridList}>
+                             {content4}
                          </Box>
                     </Paper> 
                  </Grid>
