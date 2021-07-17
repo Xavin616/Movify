@@ -87,7 +87,7 @@ const useCardStyles = makeStyles((theme) => ({
         },
     },
     content: {
-        padding: '15px 5px 5px 6px', 
+        padding: '15px 5px 5px 14px', 
         marginTop: 5, 
         backgroundColor: 'transparent',
         color: 'white',
@@ -126,7 +126,7 @@ function Body() {
     const styles = useStyles()
     const classes = useCardStyles()
     
-    const url1 = "https://api.themoviedb.org/3/movie/popular?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1"
+    const url1 = "https://api.themoviedb.org/3/trending/all/day?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1"
     const url2 = "https://api.themoviedb.org/3/tv/popular?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1"
     const url3 = "https://api.themoviedb.org/3/tv/airing_today?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1";
     const url4 = "https://api.themoviedb.org/3/discover/tv?api_key=546988151aeca0994227ca10917c13db&language=en-US&sort_by=popularity.desc&first_air_date.gte=2019&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_networks=213"
@@ -259,7 +259,7 @@ function Body() {
                          <div className="header">
                             <Typography className={styles.heading} variant="h4">
                                 <Link to="/category/movie/popular">
-                                    Popular Movies
+                                    Trending Today
                                 </Link>
                             </Typography>
                          </div>

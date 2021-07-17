@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
         margin: '0 0 0 45px',
         // eslint-disable-next-line
         ['media (max-width: 400px)']: {
-            margin: '0 0 0 5px',
+            margin: '0 0 0 15px',
             padding: 0,
         }
     },
@@ -47,6 +47,8 @@ const useStyles = makeStyles((theme) => ({
         color: 'white',
         fontSize: '0.95em',
         textTransform: 'none',
+        margin: '0px 10px 0px 10px',
+        padding: 10,
         fontWeight: 'bolder',
         fontFamily: 'Source Sans Pro, sans-serif',
         // eslint-disable-next-line
@@ -73,10 +75,23 @@ const useStyles = makeStyles((theme) => ({
 
 function Header() {
     let name;
+    let button1; 
+    let button2; 
+    let button3;
     let isPageSmall = useMediaQuery('(max-width:400px)')
     const classes = useStyles();
 
-    (isPageSmall ? name = 'M': name = 'Movify')
+    if (isPageSmall) { 
+        name = 'M';
+        button1 = 'Tv';
+        button2 = 'Movies';
+        button3 = 'New';
+    } else { 
+        name = 'Movify';
+        button1 = 'Tv Shows';
+        button2 = 'Movies';
+        button3  = 'New, Coming, Latest';
+    }
 
     return (
         <header>
@@ -90,17 +105,17 @@ function Header() {
                     <div className={classes.buttongroup}>
                         <Link to='/category/tv/top_rated'>
                             <Button size={'small'} className={classes.btn}>
-                                TV
+                                {button1}
                             </Button>
                         </Link>
                         <Link to='/category/movie/top_rated'>
                             <Button size={'small'} className={classes.btn}>
-                                Movies
+                                {button2}
                             </Button>
                         </Link>
                         <Link>
                             <Button size={'small'} className={classes.btn}>
-                                New
+                                {button3}
                             </Button>
                         </Link>
                     </div>
