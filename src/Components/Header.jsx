@@ -38,8 +38,8 @@ const useStyles = makeStyles((theme) => ({
     buttongroup: {
         margin: '0 0 0 45px',
         // eslint-disable-next-line
-        ['media (max-width: 400px)']: {
-            margin: '0 0 0 15px',
+        ['@media (max-width: 400px)']: {
+            margin: '0 0 0 30px',
             padding: 0,
         }
     },
@@ -52,9 +52,9 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bolder',
         fontFamily: 'Source Sans Pro, sans-serif',
         // eslint-disable-next-line
-        ['media (max-width: 400px)']: {
+        ['@media (max-width: 400px)']: {
             margin: 0,
-            padding: 2,
+            padding: 0,
         }
     },
     menulist: {

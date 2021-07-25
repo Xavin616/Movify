@@ -110,7 +110,6 @@ const useCardStyles = makeStyles((theme) => ({
 
 }));
 
-
 function Body() {
     let content1;
     let content2;
@@ -119,15 +118,11 @@ function Body() {
 
     let number;
 
-    let isPageSmall = useMediaQuery('(max-width: 400px)');
-
-    (isPageSmall ? number = 0 : number = 1)
-
     const styles = useStyles()
     const classes = useCardStyles()
     
-    const url1 = "https://api.themoviedb.org/3/trending/all/day?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1"
-    const url2 = "https://api.themoviedb.org/3/tv/popular?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1"
+    const url1 = "https://api.themoviedb.org/3/trending/movie/day?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1"
+    const url2 = "https://api.themoviedb.org/3/trending/tv/day?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1"
     const url3 = "https://api.themoviedb.org/3/tv/airing_today?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1";
     const url4 = "https://api.themoviedb.org/3/discover/tv?api_key=546988151aeca0994227ca10917c13db&language=en-US&sort_by=popularity.desc&first_air_date.gte=2019&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_networks=213"
 
@@ -259,7 +254,7 @@ function Body() {
                          <div className="header">
                             <Typography className={styles.heading} variant="h4">
                                 <Link to="/category/movie/popular">
-                                    Trending Today
+                                    Trending Movies
                                 </Link>
                             </Typography>
                          </div>
@@ -272,7 +267,7 @@ function Body() {
                     <Paper className={styles.paper}>
                          <Typography className={styles.heading} variant="h4">
                             <Link to="/category/tv/popular">
-                                Popular On Tv
+                                Trending On Tv
                             </Link>
                          </Typography>
                          <Box className={styles.gridList}>
