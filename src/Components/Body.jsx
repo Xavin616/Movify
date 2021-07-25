@@ -4,7 +4,7 @@ import {  Grid, Paper, Typography, Box } from '@material-ui/core';
 import CustomCard from './Subcomponents/CustomCard';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { useMediaQuery } from './Subcomponents/Query';
+//import { useMediaQuery } from './Subcomponents/Query';
 //import { ChevronRight } from '@material-ui/icons'
 
 

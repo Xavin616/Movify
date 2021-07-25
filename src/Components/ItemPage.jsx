@@ -122,7 +122,7 @@ const useStyles = makeStyles((theme) => ({
 function ItemPage() {
     const { id, str } = useParams()
 
-    let vidurl = `https://api.themoviedb.org/3/${str}/${id}/videos?api_key=546988151aeca0994227ca10917c13db&language=en-US`
+    //let vidurl = `https://api.themoviedb.org/3/${str}/${id}/videos?api_key=546988151aeca0994227ca10917c13db&language=en-US`
     let url = `https://api.themoviedb.org/3/${str}/${id}?api_key=546988151aeca0994227ca10917c13db&language=en-US`
     
     let content;
@@ -167,16 +167,17 @@ function ItemPage() {
         </ul>
     }
 
-    const [vid, setVid] = useState(null);
 
-    useEffect(() => {
+//    const [vid, setVid] = useState(null);
+//eslint-disable-next-line
+{/*    useEffect(() => {
         axios.get(vidurl)
             .then(response => {
                 //console.log(response.data);
                 let viddata = response.data;
                 setVid(viddata);
             })
-    }, [vidurl])
+    }, [vidurl]) */}
 
 
     return (
