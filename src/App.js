@@ -18,9 +18,6 @@ const theme = createMuiTheme({
     primary: {
       main: cyan[500],
     },
-    secondary: {
-      main: '#fff',
-    }
   }
 })
 

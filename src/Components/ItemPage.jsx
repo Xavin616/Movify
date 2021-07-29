@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
-import { Paper, Card, CardMedia, Typography } from '@material-ui/core';
+import { Paper, Button, Box, Card, CardMedia, Typography } from '@material-ui/core';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import { makeStyles } from '@material-ui/core';
+import VideoComp from './Subcomponents/VideoComp';
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -23,11 +25,12 @@ const GlobalStyle = createGlobalStyle`
 
 const useStyles = makeStyles((theme) => ({
     paperContainer: {
+        backgroundColor: 'transparent',
+        padding: 25,
         color: 'white',
-        padding: 30,
         // eslint-disable-next-line
         ['@media (max-width: 400px)']: {
-            padding: 10,
+            padding: 15,
         },
     },
     flexContainer: {
@@ -50,9 +53,10 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'transparent',
         // eslint-disable-next-line
         ['@media (max-width: 400px)']: {
-            height: 300,
-            width: 200,
+            height: 'auto',
+            width: 180,
             float: 'none',
+            marginTop: 10,
         },
     },
     media: {
@@ -85,29 +89,62 @@ const useStyles = makeStyles((theme) => ({
         // eslint-disable-next-line
         ['@media (max-width: 400px)']: {
             textAlign: 'center',
-            fontSize: '2em',
+            fontSize: '1.65em',
+            margin: '5px 0px 8px 0px',
         },
     },
     overview: {
         color: 'white',
-        marginTop: 0,
+        marginTop: 25,
         marginLeft: 5,
+        fontFamily: 'Source Sans Pro, sans-serif',
+        // eslint-disable-next-line
+        ['@media (max-width: 400px)']: {
+            fontSize: '0.85em',
+        },
+    },
+    btngrp: {
+        marginTop: '15px ',
+    },
+    btn: {
+        marginLeft: 10,
+        marginRight: 5,
+        backgroundColor: 'red',
+        fontWeight: 'bolder',
+        textTransform: 'none',
+        fontSize: '0.95em',
+        borderRadius: '6px',
+        fontFamily: 'Source Sans Pro, sans-serif',
+        '&:hover': {
+            backgroundColor: 'cyan',
+        }
+    },
+    tag: {
+        marginTop: -6,
+        fontStyle: 'italic',
+        marginLeft: 8,
+        marginBottom: 22,
     },
     properties: {
         padding: 0,
     },
     listProps: {
+        marginTop: 25,
         textAlign: 'center',
         display: 'flex',
         padding: 0,
+        fontSize: '0.9em',
         flexWrap: 'wrap',
         fontWeight: 'bold',
+        fontFamily: 'Source Sans Pro, sans-serif',
         margin: '0px 0px 15px 0px',
         width: 100 + '%',
         // eslint-disable-next-line
         ['@media (max-width: 400px)']: {
             width: 100+'%', 
+            fontSize: '0.87em',
             textAlign: 'center',
+            justifyContent: 'center',
         },
     },
     listItem:{
@@ -117,19 +154,28 @@ const useStyles = makeStyles((theme) => ({
     tab: {
         marginLeft: '8px',
     },
+    gridList: {
+        width: 100 + '%',
+        height: 'max-content',
+        display: 'flex',
+        padding: '8px 5px 0px 5px',
+        overflow: 'scroll auto',
+    },
 }))
 
 function ItemPage() {
     const { id, str } = useParams()
 
-    //let vidurl = `https://api.themoviedb.org/3/${str}/${id}/videos?api_key=546988151aeca0994227ca10917c13db&language=en-US`
+    let vidurl = `https://api.themoviedb.org/3/${str}/${id}/videos?api_key=546988151aeca0994227ca10917c13db&language=en-US`
     let url = `https://api.themoviedb.org/3/${str}/${id}?api_key=546988151aeca0994227ca10917c13db&language=en-US`
-    
+    //let image_url = `https://api.themoviedb.org/3/${str}/${id}/images?api_key=546988151aeca0994227ca10917c13db&language=en-US`
+
     let content;
     let properties;
     let img_url;
     let image;
     let title;
+    let tag;
 
     const classes = useStyles()
     const [item, setItem] = useState(null)
@@ -143,23 +189,22 @@ function ItemPage() {
     }, [url])
 
     if (item) {
-
+        tag = item.tagline;
         //title = item.original_title;
         (str === 'movie' ? title = item.original_title : title = item.original_name);
         img_url = 'https://image.tmdb.org/t/p/original' + item.backdrop_path;
-        image = "https://image.tmdb.org/t/p/original" + item.poster_path;
+        image = "https://image.tmdb.org/t/p/original" + item.poster_path || item.backdrop_path;
         content = item.overview; 
         let lists = [];
         const genrate = (list) => {
             for (var v = 0;  v < list.length; v++) {
-                console.log(list[v].name);
                 lists.push(list[v].name);
             }
             return lists.join(', ')
         }
         let genres = genrate(item.genres);
         properties = <ul className={classes.listProps}>
-            <li className={classes.listItem}><span>{item.vote_average}</span></li>
+            <li className={classes.listItem}><span>Rating:  {item.vote_average}</span></li>
             <li className={classes.listItem}>&#9679;<span className={classes.tab}>{item.release_date || item.first_air_date}</span></li>
             <li className={classes.listItem}>&#9679;<span className={classes.tab}>{item.spoken_languages[0].english_name}</span></li>
             <li className={classes.listItem}>&#9679;<span className={classes.tab}>{genres}</span></li>
@@ -167,17 +212,25 @@ function ItemPage() {
         </ul>
     }
 
-
-//    const [vid, setVid] = useState(null);
+const [vid, setVid] = useState(null);
 //eslint-disable-next-line
-{/*    useEffect(() => {
+    useEffect(() => {
         axios.get(vidurl)
             .then(response => {
-                //console.log(response.data);
-                let viddata = response.data;
+                console.log(response.data);
+                let viddata = response.data.results;
                 setVid(viddata);
             })
-    }, [vidurl]) */}
+    }, [vidurl])
+
+let trailer_list;
+
+if (vid) {
+    const list = vid.slice(0, 7);
+    trailer_list = list.map((trailer, key) => 
+        <VideoComp framekey={trailer.key}/>
+    )
+}
 
 
     return (
@@ -209,6 +262,18 @@ function ItemPage() {
                             <Typography variant={'h4'} component={'h4'} className={classes.name}>
                                 {title}
                             </Typography>
+                            <p className={classes.tag}>{tag}</p>
+                            <div className={classes.btngrp}>
+                                <a href='#trailer'>
+                                    <Button className={classes.btn} variant='contained'>
+                                        <PlayArrowIcon />
+                                        Trailers
+                                    </Button>
+                                </a>
+                                <Button className={classes.btn} variant='contained'>
+                                    Download
+                                </Button>
+                            </div>
                             <div className={classes.properties}>
                                 {properties}
                             </div>
@@ -218,7 +283,20 @@ function ItemPage() {
                         </div>
                     </div>
                 </div>
-            </Paper>     
+            </Paper>
+            <div id="trailer">
+                <Paper className={classes.paperContainer}>
+                    <Typography 
+                        style={{ fontFamily: 'Source Sans Pro, sans-serif', fontSize: '1.7em',marginLeft: 10, fontWeight: 'bold', padding: 6,}}
+                        variant={'h5'}
+                    >
+                        Trailers
+                    </Typography>
+                    <Box className={classes.gridList}>
+                        {trailer_list}
+                    </Box>
+                </Paper>
+            </div>
         </div>
     )
 }
