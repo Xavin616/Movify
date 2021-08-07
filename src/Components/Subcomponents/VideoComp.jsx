@@ -8,8 +8,8 @@ const useStyles = makeStyles((theme) => ({
         margin: '0px 12px 9px 12px',
         //eslint-disable-next-line
         ['@media (max-width: 400px)']: {
-            height: 152,
-            width: 270,
+            height: 170,
+            width: 'auto',
         },
     },
 }));

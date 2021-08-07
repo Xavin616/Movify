@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '10px 10px',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
-            padding: '0px 10px',
+            padding: '0px 6px',
         },
         display: 'flex',
         flexDirection: 'column',
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '15px 20px',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
-            padding: '20px 10px 5px 0px',
+            padding: '10px 5px 5px 0px',
         },
         backgroundColor: '#060806',
         overflow: 'hidden',
@@ -40,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: 'Source Sans Pro, sans-serif',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
-            fontSize: '1.2em',
+            fontSize: '1.25em',
+            fontWeight: 'bold',
         },
         '&:hover': {
             color: 'cyan',
@@ -51,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
         width: 100 + '%',
         height: 'max-content',
         display: 'flex',
-        padding: '8px 5px 0px 5px',
+        padding: '4px 5px 0px 5px',
         overflow: 'scroll hidden',
     }
 }))

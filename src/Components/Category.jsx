@@ -41,7 +41,7 @@ const useCardStyles = makeStyles((theme) => ({
     root: {
         minWidth: 80,
         maxWidth: 175,
-        margin: '1.8px 0px',
+        margin: 2,
         backgroundColor: 'transparent',
         border: 'none',
         transition: '0.5s',
@@ -82,7 +82,7 @@ function Category() {
     let number;
     let isPageSmall = useMediaQuery('(max-width: 400px)');
 
-    (isPageSmall ? number = 4 : number = 4)
+    (isPageSmall ? number = 1 : number = 4)
 
     const { str1, str2 } = useParams();
 

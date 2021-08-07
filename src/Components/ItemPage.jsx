@@ -2,26 +2,11 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { createGlobalStyle } from 'styled-components';
-import { Paper, Button, Box, Card, CardMedia, Typography } from '@material-ui/core';
+import { Paper, Button, Card, CardMedia, Typography } from '@material-ui/core';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import { makeStyles } from '@material-ui/core';
-import VideoComp from './Subcomponents/VideoComp';
-
-const GlobalStyle = createGlobalStyle`
-    body {
-        color: white;
-        background-color: #060806;
-    }
-    .makeStyles-header-2 {
-        background-color: #060806;
-        box-shadow: none;
-        color: #1b1b1b;
-    }
-    .makeStyles-title-3 {
-        color: cyan;
-    }
-`
+import Trailer from './Subcomponents/Trailer';
+import { genrate } from './Subcomponents/Query';
 
 const useStyles = makeStyles((theme) => ({
     paperContainer: {
@@ -95,8 +80,7 @@ const useStyles = makeStyles((theme) => ({
     },
     overview: {
         color: 'white',
-        marginTop: 25,
-        marginLeft: 5,
+        marginTop: 20,
         fontFamily: 'Source Sans Pro, sans-serif',
         // eslint-disable-next-line
         ['@media (max-width: 400px)']: {
@@ -166,7 +150,6 @@ const useStyles = makeStyles((theme) => ({
 function ItemPage() {
     const { id, str } = useParams()
 
-    let vidurl = `https://api.themoviedb.org/3/${str}/${id}/videos?api_key=546988151aeca0994227ca10917c13db&language=en-US`
     let url = `https://api.themoviedb.org/3/${str}/${id}?api_key=546988151aeca0994227ca10917c13db&language=en-US`
     //let image_url = `https://api.themoviedb.org/3/${str}/${id}/images?api_key=546988151aeca0994227ca10917c13db&language=en-US`
 
@@ -194,48 +177,20 @@ function ItemPage() {
         (str === 'movie' ? title = item.original_title : title = item.original_name);
         img_url = 'https://image.tmdb.org/t/p/original' + item.backdrop_path;
         image = "https://image.tmdb.org/t/p/original" + item.poster_path || item.backdrop_path;
-        content = item.overview; 
-        let lists = [];
-        const genrate = (list) => {
-            for (var v = 0;  v < list.length; v++) {
-                lists.push(list[v].name);
-            }
-            return lists.join(', ')
-        }
-        let genres = genrate(item.genres);
+        content = item.overview;
+
+        let genres = genrate(item.genres, 'name');
         properties = <ul className={classes.listProps}>
-            <li className={classes.listItem}><span>Rating:  {item.vote_average}</span></li>
+            <li className={classes.listItem}><span>Rating:  {item.vote_average * 10}%</span></li>
             <li className={classes.listItem}>&#9679;<span className={classes.tab}>{item.release_date || item.first_air_date}</span></li>
-            <li className={classes.listItem}>&#9679;<span className={classes.tab}>{item.spoken_languages[0].english_name}</span></li>
+            <li className={classes.listItem}>&#9679;<span className={classes.tab}>{item.spoken_languages === [] ? 'English' : (genrate(item.spoken_languages, 'english_name'))}</span></li>
             <li className={classes.listItem}>&#9679;<span className={classes.tab}>{genres}</span></li>
             <li className={classes.listItem}>&#9679;<span className={classes.tab}>Status: {item.status}</span></li>
         </ul>
     }
 
-const [vid, setVid] = useState(null);
-//eslint-disable-next-line
-    useEffect(() => {
-        axios.get(vidurl)
-            .then(response => {
-                console.log(response.data);
-                let viddata = response.data.results;
-                setVid(viddata);
-            })
-    }, [vidurl])
-
-let trailer_list;
-
-if (vid) {
-    const list = vid.slice(0, 7);
-    trailer_list = list.map((trailer, key) => 
-        <VideoComp framekey={trailer.key}/>
-    )
-}
-
-
     return (
         <div>
-            <GlobalStyle />
             <Paper 
                 style={{
                     backgroundImage: `url(${img_url})`, 
@@ -271,7 +226,7 @@ if (vid) {
                                     </Button>
                                 </a>
                                 <Button className={classes.btn} variant='contained'>
-                                    Download
+                                    Media
                                 </Button>
                             </div>
                             <div className={classes.properties}>
@@ -284,19 +239,7 @@ if (vid) {
                     </div>
                 </div>
             </Paper>
-            <div id="trailer">
-                <Paper className={classes.paperContainer}>
-                    <Typography 
-                        style={{ fontFamily: 'Source Sans Pro, sans-serif', fontSize: '1.7em',marginLeft: 10, fontWeight: 'bold', padding: 6,}}
-                        variant={'h5'}
-                    >
-                        Trailers
-                    </Typography>
-                    <Box className={classes.gridList}>
-                        {trailer_list}
-                    </Box>
-                </Paper>
-            </div>
+            <Trailer media={str} id={id} />
         </div>
     )
 }
