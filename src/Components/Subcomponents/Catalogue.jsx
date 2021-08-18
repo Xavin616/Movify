@@ -53,7 +53,7 @@ const useCardStyles = makeStyles((theme) => ({
         ['@media (max-width: 400px)']:{
             minWidth: 95,
             margin: '0px 0px -1px 0px',
-            transform: 'scale(0.91)',
+            transform: 'scale(0.915)',
             height: 99.5+'%',
         },
     },
