@@ -1,151 +1,243 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
-import { Typography, Paper, Grid } from '@material-ui/core';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import CustomCard from './Subcomponents/CustomCard';
-import { useParams } from 'react-router-dom';
+import { makeStyles } from '@material-ui/styles';
+import Catalogue from './Subcomponents/Catalogue'
+import { Button, Paper, Typography } from '@material-ui/core';
 import { useMediaQuery } from './Subcomponents/Query';
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
-    mainBody: {
-        flexGrow: 1,
-        width: '100%',
-        padding: '15px 20px',
-        // eslint-disable-next-line
-        ['@media (max-width: 450px)']:{
-            padding: '0px',
-        },
+    contcat: {
+        padding: 15,
+        width: 100+'%',
         display: 'flex',
-        flexDirection: 'column',
-    },
-    paper: {
-        height: 'auto',
-        padding: '20px 30px',
+        justifyContent: 'space-around',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
-            padding: '20px 16px 5px 16px',
+            flexDirection: 'column',
+            padding: 0,
         },
-        backgroundColor: '#0d0d0dde',
-        overflow: 'hidden',
-        color: 'white',
     },
-    heading: {
-        marginBottom: 18,
-        fontWeight: 'bold',
-        fontSize: '1.6em',
-    }
-}));
-
-const useCardStyles = makeStyles((theme) => ({
-    root: {
-        minWidth: 80,
-        maxWidth: 175,
-        margin: 2,
-        backgroundColor: 'transparent',
+    searchPanel: {
+        //minWidth: 25+'%',
+        margin: '10px 8px 5px 0px',
+        padding: 25,
+        width: 75+'%',
+        flexGrow: 1,
+        height: 'fit-content',
+        backgroundColor: '#000000c9',
+        boxShadow: '0px 6px 15px #060810',
+        color: 'white',
+        // eslint-disable-next-line
+        ['@media (max-width: 450px)']:{
+            width: 100+'%',
+            margin: 0,
+        },
+    },
+    catalogue: {
+        padding: 2,
+        marginTop: 2,
+        minWidth: 50+'%',
+        flexGrow: 1,
+        // eslint-disable-next-line
+        ['@media (max-width: 450px)']:{
+            padding: 0,
+        },
+    },
+    searchInput: {
+        height: 38,
+        background: '#0D353F',
         border: 'none',
-        transition: '0.5s',
-        '&:hover': {
-            cursor: 'pointer',
-            transform: 'scale(1.03)',
+        outline: 'none',
+        padding: '13px',
+        borderRadius: 8,
+        color: '#ebfcff',
+        fontSize: '0.98em',
+        '&::placeholder':{
+            color: '#c3f5fd',
         }
     },
-    media: {
-        height: 'auto',
-        width: 100 + '%',
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
-
+    select: {
+        backgroundColor: '#0D353F',
+        color: '#ebfcff',
+        height: 35,
+        border: 'none',
+        width: 70+'%',
+        padding: '5px 15px 5px 20px',
+        appearance: 'none',
+        borderRadius: 5,
+        fontSize: '1.1em',
+        marginBottom: 10,
     },
-    content: {
-        padding: 15,
-        marginTop: 5, 
-        backgroundColor: 'transparent',
+    header: {
+        fontWeight: '400',
+        padding: '2px 2px 8px 2px',
+        fontFamily: 'Source Sans Pro, san-serif',
+    },
+    submitButton: {
+        width: 100+'%',
+        height: 25,
+        padding: 18,
         color: 'white',
-    },
-    title: {
-        marginTop: -9,
-        fontSize: '0.89em',
+        textTransform: 'none',
         fontWeight: 'bolder',
+        fontSize: '1.2em',
+        backgroundColor: '#00d6d6',
+        margin: '10px 0px 3px 0px',
         fontFamily: 'Source Sans Pro, sans-serif',
-        padding: 0,
+        '&:active, &:hover': {
+            backgroundColor: 'red',
+        }
     },
-    date: {
-        fontSize: '0.8em',
-        marginTop: 5,
-    }
+}))
 
-}));
+function Category(props) {
+    const media = props.media;
+    const pop_url  = `https://api.themoviedb.org/3/${media}/popular?api_key=546988151aeca0994227ca10917c13db&language=en-US`
+    const isMediaSmall = useMediaQuery('(max-width:400px)')
 
+    const classes = useStyles()
 
-function Category() {
-    let number;
-    let isPageSmall = useMediaQuery('(max-width: 400px)');
-
-    (isPageSmall ? number = 1 : number = 4)
-
-    const { str1, str2 } = useParams();
-
-    let content;
-    const styles = useStyles();
-    const cardstyle = useCardStyles();
-    const url = `https://api.themoviedb.org/3/${str1}/${str2}?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1`
-
-    const [data, setData] = useState(null);
+    const [data, setData] = useState(null)
     useEffect(() => {
-        axios.get(url)
-            .then(response => {
-                let datan = response.data.results;
-                console.log(datan);
-                setData(datan)
-            })
-            .catch(error => 
-                    console.error(error)
-                )
-    }, [url])
+        axios.get(pop_url)
+        .then(response => {
+            setData(response.data.results)
+        })
+    }, [pop_url])
 
-    if (data) {
-        content = 
-            data.map((datum, key) => 
-                (str1 === "movie") ?
-                    (<Grid item xs={6} sm={4} md={3} lg={2}>
-                        <CustomCard 
-                            type={'movie'}
-                            classes={cardstyle}
-                            image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
-                            title={datum.original_title}
-                            date={datum.release_date}
-                            id={datum.id}
-                        />
-                    </Grid>)
-                        :
-                    (<Grid item xs={6} sm={4} md={3} lg={2}>
-                        <CustomCard
-                            type={'tv'}
-                            classes={cardstyle}
-                            image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
-                            title={datum.original_name}
-                            date={datum.first_air_date}
-                            id={datum.id}
-                        />
-                    </Grid>)
-            )
+    let categoryList;
+
+    if (media === 'movie') {
+        categoryList = 
+            <select 
+                onChange={(e) => {setCategory(e.target.value); console.log(e.target.value)}} 
+                name="category" 
+                id="category"
+                className={classes.select}
+            >
+                <option value="popular">Popular</option>
+                <option value="top_rated">Top Rated</option>
+                <option value="now_playing">Now Playing</option>
+                <option value="upcoming">Upcoming</option>
+                <option value="latest">Latest</option>
+            </select>
+    } else {
+        categoryList =
+        <select 
+            onChange={(e) => {setCategory(e.target.value); console.log(e.target.value)}} 
+            name="category" 
+            id="category"
+            className={classes.select}
+        >
+            <option value="popular">Popular</option>
+            <option value="top_rated">Top Rated</option>
+            <option value="airing_today">Airing Today</option>
+            <option value="latest">Latest</option>
+        </select>
     }
 
-    return (
-        <div className={styles.mainBody}>
-                <Paper className={styles.paper}>
-                         <div className="header">
-                            <Typography className={styles.heading} variant="h4">
-                                {str2}
+    const [name, setName] = useState('');
+    const [category, setCategory] = useState('popular')
+    const [genre, setGenre] = useState(null)
+
+    const handleSubmitName = (e) => {
+        e.preventDefault()
+        console.log(name);
+        console.log(search_url)
+        axios.get(search_url)
+            .then(response => {
+                console.log(response.data);
+                setData(response.data.results)
+            })
+    };
+
+    const handleSubmitCategory = (e) => {
+        e.preventDefault()
+        console.log(category);
+        console.log(genre);
+        axios.get(category_url)
+            .then(response => {
+                console.log(response.data);
+                setData(response.data.results)
+            })
+    };
+
+    const category_url = `https://api.themoviedb.org/3/${media}/${category}?api_key=546988151aeca0994227ca10917c13db&language=en-US`
+    const search_url = `https://api.themoviedb.org/3/search/${media}?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1&query=${name}`
+
+    return ( 
+        <div className={classes.contcat}>
+            <Paper className={classes.searchPanel}>
+                <div>
+                    <Typography 
+                        component={'h3'} 
+                        variant={'h5'}
+                        className={classes.header}
+                    >
+                        Discover
+                    </Typography>
+                        <form 
+                            style={{
+                                position: 'relative',
+                                display: 'flex',
+                                flexDirection: 'column',}}
+                            onSubmit={handleSubmitName}
+                        >
+                            <input
+                                className={classes.searchInput}
+                                placeholder="Search by Name" 
+                                type="text"
+                                value={name} 
+                                onChange={(e) => setName(e.target.value)} 
+                            />
+                            <button type='submit' 
+                                style={{
+                                        backgroundColor: 'transparent',
+                                        color: 'white',
+                                        border: 'none',
+                                        position: 'absolute',
+                                        borderRadius: '25px',
+                                        padding: 2,
+                                        left: 85+'%',
+                                        top: '6px',
+                                    }}>
+                                <SearchIcon 
+                                    style={{
+                                        
+                                    }}
+                                    size='large'
+                                />
+                            </button>
+                        </form>
+                        <br />
+                        <form 
+                            onSubmit={handleSubmitCategory}
+                            >
+                            <Typography 
+                                component={'h3'} 
+                                variant={'h6'}
+                                className={classes.header}
+                            >
+                                Category
                             </Typography>
-                         </div>
-                         <Grid container spacing={number}>
-                            {content} 
-                         </Grid>
-                     </Paper>
+                            {categoryList}
+                            {/*<div className="filter-wrapper">
+                                Genres
+                                    <input type="radio" name="genre1" id="action" value="action" onChange={(e) => setGenre(e.target.value)} />
+                                    <input type="radio" name="genre2" id="horror" value="horror" onChange={(e) => setGenre(e.target.value)} />
+                                    <input type="radio" name="genre3" id="comedy" value="comedy" onChange={(e) => setGenre(e.target.value)} />
+                            </div>*/}
+                            <Button className={classes.submitButton} type="submit">Search</Button>
+                    </form>
+                </div>
+            </Paper>
+            <div className={classes.catalogue}>
+                <Catalogue data={data} media={props.media} />
+            </div>
         </div>
     )
-}
+}    
 
 export default Category

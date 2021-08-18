@@ -1,74 +1,38 @@
 import React from "react";
 import { useMediaQuery } from "./Subcomponents/Query";
 import { makeStyles } from "@material-ui/core";
-import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
+import { AppBar, Typography, Tabs, Tab } from "@material-ui/core";
 //import { SearchRounded } from "@material-ui/icons";
 //import NotificationsIcon from '@material-ui/icons/Notifications';
 import {Link} from 'react-router-dom';
+import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        padding: '1px 10px',
-        flexGrow: 0, 
-    },
-    header: {
-        margin: 0,
-        padding: '-2px 2px',
-        position: 'static',
-        backgroundColor: '#060806',
-        boxShadow: 'none',
-        // eslint-disable-next-line
-        ['@media (max-width:400px)']: {
-            padding: 0,
-        },
+        flexGrow: 1, 
+        padding: '6px 6px 0px 6px',
+        display: 'inline-flex',
+        flexDirection: 'row',
     },
     title: {
         flexGrow: 0,
-        marginLeft: '40px',
+        padding: 5,
+        margin: '5px 10px 10px 45px',
         fontFamily: 'Pacifico, cursive',
         color: 'cyan',
-        fontSize: '1.48em',
+        fontSize: '1.6em',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
-            margin: '10px -30px 10px 2.5px',
+            margin: '10px -30px 0px 2.5px',
             fontSize: '1.3em',
             fontWeight: 'bolder',
         },
     },
-    buttongroup: {
-        margin: '0 0 0 45px',
-        // eslint-disable-next-line
-        ['@media (max-width: 400px)']: {
-            margin: '0 0 0 30px',
-            padding: 0,
-        }
-    },
-    btn: {
-        color: 'white',
-        fontSize: '0.95em',
+    tabName: {
         textTransform: 'none',
-        margin: '0px 10px 0px 10px',
-        padding: 10,
-        fontWeight: 'bolder',
-        fontFamily: 'Source Sans Pro, sans-serif',
-        // eslint-disable-next-line
-        ['@media (max-width: 400px)']: {
-            margin: 0,
-            padding: 0,
-        }
-    },
-    menulist: {
-        position: 'relative',
-        marginLeft: 0,
-        marginRight: '100px',
-        fontSize: '2rem',
-    },
-    icons: {
-        color: 'cyan', 
-        // eslint-disable-next-line
-        ['@media (max-width:400px)']: {
-            display: 'none',
-        },
+        fontWeight: 'bold',
+        fontSize: '0.95em',
+        fontFamily: 'Source Sans Pro, san serif ',
     }
 }))
 
@@ -93,35 +57,42 @@ function Header() {
         button3  = 'New, Coming, Latest';
     }
 
+    const lookUp = {
+        '/tv': 0,
+        '/movies': 1,
+        '/new': 2,
+        0: '/tv',
+        1: '/movies',
+        2: '/news'
+    }
+    
+    let pathname = window.location.pathname;
+
+    const [value, setValue] = useState(lookUp[pathname])
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+        console.log(value)
+    }
+
     return (
-        <header>
-            <AppBar position="static" className={classes.header}>
-                <Toolbar>
+            <AppBar position="static" className={classes.root}>
                     <Typography variant="h5" className={classes.title}>
                         <Link to='/'>
                             {name}
                         </Link>
                     </Typography>
-                    <div className={classes.buttongroup}>
-                        <Link to='/category/tv/top_rated'>
-                            <Button size={'small'} className={classes.btn}>
-                                {button1}
-                            </Button>
-                        </Link>
-                        <Link to='/category/movie/top_rated'>
-                            <Button size={'small'} className={classes.btn}>
-                                {button2}
-                            </Button>
-                        </Link>
-                        <Link>
-                            <Button size={'small'} className={classes.btn}>
-                                {button3}
-                            </Button>
-                        </Link>
-                    </div>
-                </Toolbar>
+                    <Tabs 
+                        style={{margin: '5px 10px 0px 40px', position: 'relative', bottom: 0, left: 0,}} 
+                        value={value} 
+                        onChange={handleChange} 
+                        aria-label="simple tabs example"
+                    >
+                        <Tab href='/tv' className={classes.tabName} style={{color: 'white',}} onclick={window.location} label={button1}/>
+                        <Tab href ='/movies' className={classes.tabName} style={{color: 'white',}} label={button2}/>
+                        <Tab href='/new' className={classes.tabName} style={{color: 'white',}} label={button3} />
+                    </Tabs>
             </AppBar>
-        </header>
     )
 }
 

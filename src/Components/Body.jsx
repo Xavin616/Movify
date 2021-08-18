@@ -4,8 +4,9 @@ import {  Grid, Paper, Typography, Box } from '@material-ui/core';
 import CustomCard from './Subcomponents/CustomCard';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-//import { useMediaQuery } from './Subcomponents/Query';
+import { useMediaQuery } from './Subcomponents/Query';
 //import { ChevronRight } from '@material-ui/icons'
+import cinema from '../cinema.jpg'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,21 +23,22 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         height: 'auto',
-        padding: '15px 20px',
+        padding: '5px 10px 2px 12px',
+        backgroundColor: '#000000bf',
+        backgroundBlendMode: 'multiply',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
             padding: '10px 5px 5px 0px',
         },
-        backgroundColor: '#060806',
         overflow: 'hidden',
     },
     heading: {
-        marginLeft: 6,
+        marginLeft: 9,
         marginBottom: '10px',
-        marginTop: 2,
+        marginTop: 16,
         color: 'white',
-        //fontWeight: 'bold',
-        fontSize: '1.4em',
+        fontWeight: 400,
+        fontSize: '1.50em',
         fontFamily: 'Source Sans Pro, sans-serif',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
@@ -52,17 +54,18 @@ const useStyles = makeStyles((theme) => ({
         width: 100 + '%',
         height: 'max-content',
         display: 'flex',
-        padding: '4px 5px 0px 5px',
+        padding: '4px 5px 0px 15px',
         overflow: 'scroll hidden',
     }
 }))
 
 const useCardStyles = makeStyles((theme) => ({
     root: {
-        margin: '0px 8px',
-        minWidth: 162,
-        height: 96+'%',
-        backgroundColor: 'transparent',
+        margin: '0px 7.5px',
+        //minWidth: 162,
+        width: 160,
+        height: 94+'%',
+        backgroundColor: '#060806',
         border: 'none',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
@@ -116,8 +119,10 @@ function Body() {
     let content2;
     let content3;
     let content4;
+    const isMediaSmall = useMediaQuery('(max-width: 400px)')
 
     let number;
+    (isMediaSmall ? number = 0 : number = 2)
 
     const styles = useStyles()
     const classes = useCardStyles()
@@ -251,7 +256,7 @@ function Body() {
         <div className={styles.mainBody}>
              <Grid container spacing={number}>
                  <Grid item xs={12}>
-                     <Paper className={styles.paper}>
+                    <Paper className={styles.paper}>
                          <div className="header">
                             <Typography className={styles.heading} variant="h4">
                                 <Link to="/category/movie/popular">

@@ -4,20 +4,23 @@ import Body from './Components/Body'
 import Category from './Components/Category'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css';
-import { cyan } from '@material-ui/core/colors';
 import ItemPage from './Components/ItemPage';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: cyan[500],
+      main: '#060806',
     },
+    secondary: {
+      main: '#00FFFF',
+    }
   }
 })
 
@@ -25,14 +28,18 @@ function App() {
   return (
     <Router>
       <ThemeProvider theme={theme}>
+        <CssBaseline/>
           <div className="App">
             <Header name='John' />
             <Switch>
               <Route exact path='/'>
                 <Body />
               </Route>
-              <Route exact path="/category/:str1/:str2">
-                <Category />
+              <Route exact path="/tv">
+                <Category media='tv' />
+              </Route>
+              <Route exact path='/movies'>
+                <Category media='movie' />
               </Route>
               <Route exact path="/:str/:id">
                 <ItemPage />
