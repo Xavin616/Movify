@@ -5,9 +5,6 @@ import CustomCard from './Subcomponents/CustomCard';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from './Subcomponents/Query';
-//import { ChevronRight } from '@material-ui/icons'
-import cinema from '../cinema.jpg'
-
 
 const useStyles = makeStyles((theme) => ({
     mainBody: {

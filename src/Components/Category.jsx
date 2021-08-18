@@ -4,7 +4,7 @@ import axios from 'axios';
 import { makeStyles } from '@material-ui/styles';
 import Catalogue from './Subcomponents/Catalogue'
 import { Button, Paper, Typography } from '@material-ui/core';
-import { useMediaQuery } from './Subcomponents/Query';
+//import { useMediaQuery } from './Subcomponents/Query';
 import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
@@ -95,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
 function Category(props) {
     const media = props.media;
     const pop_url  = `https://api.themoviedb.org/3/${media}/popular?api_key=546988151aeca0994227ca10917c13db&language=en-US`
-    const isMediaSmall = useMediaQuery('(max-width:400px)')
+    //const isMediaSmall = useMediaQuery('(max-width:400px)')
 
     const classes = useStyles()
 
@@ -140,7 +140,7 @@ function Category(props) {
 
     const [name, setName] = useState('');
     const [category, setCategory] = useState('popular')
-    const [genre, setGenre] = useState(null)
+    //const [genre, setGenre] = useState(null)
 
     const handleSubmitName = (e) => {
         e.preventDefault()
@@ -156,7 +156,6 @@ function Category(props) {
     const handleSubmitCategory = (e) => {
         e.preventDefault()
         console.log(category);
-        console.log(genre);
         axios.get(category_url)
             .then(response => {
                 console.log(response.data);
