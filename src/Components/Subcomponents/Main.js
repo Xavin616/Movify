@@ -9,7 +9,7 @@ import { genrate } from './Query';
 const useStyles = makeStyles((theme) => ({
     paperContainer: {
         backgroundColor: 'transparent',
-        padding: 25,
+        padding: '60px 25px',
         color: 'white',
         // eslint-disable-next-line
         ['@media (max-width: 400px)']: {

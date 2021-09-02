@@ -10,8 +10,8 @@ function ItemPage() {
     return (
         <div>
             <Main id={id} str={str} />
-            <Trailer media={str} id={id} />
             <ItemCast id={id} str={str} />
+            <Trailer media={str} id={id} />
         </div>
     )
 }

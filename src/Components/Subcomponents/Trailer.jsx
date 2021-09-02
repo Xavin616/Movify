@@ -57,7 +57,7 @@ function Trailer(props) {
         <div id="trailer">
             <Paper className={classes.paperContainer}>
                 <Typography 
-                    style={{ fontFamily: 'Source Sans Pro, sans-serif', fontSize: '1.6em',marginLeft: 8, fontWeight: 'bold', padding: '11.5px 4px 4px 4px',}}
+                    style={{ fontFamily: 'Source Sans Pro, sans-serif', fontSize: '1.89em', marginLeft: 8, fontWeight: 'bold', padding: '11.5px 4px 4px 4px',}}
                     variant={'h5'}
                 >
                     Trailers

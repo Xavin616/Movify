@@ -2,13 +2,13 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import { Paper } from '@material-ui/core';
 import CustomCard from './CustomCard';
-//mport { useMediaQuery } from './Query';
+import load from '../load.gif';
 
 const useStyles = makeStyles((theme) => ({
     mainBody: {
         flexGrow: 1,
         width: '100%',
-        padding: '5px 5px',
+        padding: '5px 4px',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
             padding: '0',
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'transparent',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
-            padding: '2px',
+            padding: '1px',
         },
         overflow: 'hidden',
         color: 'white',
@@ -94,21 +94,50 @@ function Catalogue(props) {
     const styles = useStyles();
     const cardstyle = useCardStyles();
 
-    if (data) {
+    let list = [1,2,34,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+
+    if (data.loading) {
+        content =
+            list.map((i, key) =>  
+                <CustomCard
+                    type={'movie'}
+                    classes={cardstyle}
+                    image={load}
+                    title={'Title'}
+                    date={'0000-00-00'}
+                    id={i}
+                />
+        )
+    }
+
+    if (data.data) {
+        console.log(data.data)
         content = 
-            data.map((datum, key) =>
+            data.data.map((datum, key) =>
                 <CustomCard 
                     type={media}
                     classes={cardstyle}
-                    image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
+                    image={datum.poster_path !== null ? 'https://image.tmdb.org/t/p/original'+  datum.poster_path : load}
                     title={datum.original_title || datum.original_name}
                     date={datum.release_date || datum.first_air_date}
                     id={datum.id}
                 />
         )
-
-    } else {
-        content = 'Your search results go here.'
+    } else if (data.data ===[]) {
+        content = `Can't find anything, try another search term!`
+    }
+    else {
+        content = 
+        list.map((i, key) =>  
+                <CustomCard
+                    type={'movie'}
+                    classes={cardstyle}
+                    image={load}
+                    title={'Title'}
+                    date={'0000-00-00'}
+                    id={i}
+                />
+        )
     }
     
     return (

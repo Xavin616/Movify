@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core';
-import {  Grid, Paper, Typography, Box } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import CustomCard from './Subcomponents/CustomCard';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { useMediaQuery } from './Subcomponents/Query';
+import load from './load.gif'
+import GridItem from './Subcomponents/GridItem';
 
 const useStyles = makeStyles((theme) => ({
     mainBody: {
@@ -13,47 +14,11 @@ const useStyles = makeStyles((theme) => ({
         padding: '10px 10px',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
-            padding: '0px 6px',
+            padding: '0px 0px',
         },
         display: 'flex',
         flexDirection: 'column',
     },
-    paper: {
-        height: 'auto',
-        padding: '5px 10px 2px 12px',
-        backgroundColor: '#000000bf',
-        backgroundBlendMode: 'multiply',
-        // eslint-disable-next-line
-        ['@media (max-width: 450px)']:{
-            padding: '10px 5px 5px 0px',
-        },
-        overflow: 'hidden',
-    },
-    heading: {
-        marginLeft: 9,
-        marginBottom: '10px',
-        marginTop: 16,
-        color: 'white',
-        fontWeight: 400,
-        fontSize: '1.50em',
-        fontFamily: 'Source Sans Pro, sans-serif',
-        // eslint-disable-next-line
-        ['@media (max-width:400px)']: {
-            fontSize: '1.25em',
-            fontWeight: 'bold',
-        },
-        '&:hover': {
-            color: 'cyan',
-        }
-        
-    },
-    gridList: {
-        width: 100 + '%',
-        height: 'max-content',
-        display: 'flex',
-        padding: '4px 5px 0px 15px',
-        overflow: 'scroll hidden',
-    }
 }))
 
 const useCardStyles = makeStyles((theme) => ({
@@ -61,8 +26,8 @@ const useCardStyles = makeStyles((theme) => ({
         margin: '0px 7.5px',
         //minWidth: 162,
         width: 160,
-        height: 94+'%',
-        backgroundColor: '#060806',
+        height: 95+'%',
+        backgroundColor: 'transparent',
         border: 'none',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
@@ -129,67 +94,89 @@ function Body() {
     const url3 = "https://api.themoviedb.org/3/tv/airing_today?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1";
     const url4 = "https://api.themoviedb.org/3/discover/tv?api_key=546988151aeca0994227ca10917c13db&language=en-US&sort_by=popularity.desc&first_air_date.gte=2019&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_networks=213"
 
-    const [newData, setNewData] = useState(null);
+    const [newData, setNewData] = useState({loading: false, data: null, error:false});
     useEffect(() => {
+            setNewData({loading: true, data: null, error: false,})
             axios.get(url1)
                 .then(response => {
                     let datum =  response.data.results;
-                    console.log(datum)
-                    setNewData(datum)
+                    setNewData({loading: false, data: datum, error: false,})
                 })
                 .catch((error) => {
-                    console.log(error)
+                    console.error(error)
+                    setNewData({loading: false, data: null, error: true,})
                 })
         }, [url1])
 
-    const [popData, setPopData] = useState(null);
+    const [popData, setPopData] = useState({loading: false, data: null, error:false});
     useEffect(() => {
+        setPopData({loading: true, data: null, error: false,})
         axios.get(url2)
             .then(response => {
                 let popdatum =  response.data.results;
-                console.log(popdatum)
-                setPopData(popdatum)
+                setPopData({loading: false, data: popdatum, error: false,})
             })
             .catch((error) => {
                 console.error(error)
+                setPopData({loading: false, data: null, error: true,})
             })
     }, [url2])
 
-    const [airData, setAirData] = useState(null);
+    const [airData, setAirData] = useState({loading: false, data: null, error:false});
     useEffect(() => {
+        setAirData({loading: true, data: null, error: false,})
         axios.get(url3)
             .then(response => {
                 let airdatum =  response.data.results;
-                console.log(airdatum)
-                setAirData(airdatum)
+                setAirData({loading: false, data: airdatum, error: false,})
             })
             .catch((error) => {
                 console.error(error)
+                setAirData({loading: false, data: null, error: true,})
             })
     }, [url3])
     
-    const [netData, setNetData] = useState(null);
+    const [netData, setNetData] = useState({loading: false, data: null, error:false});
     useEffect(() => {
-            axios.get(url4)
-                .then(response => {
-                    let datum =  response.data.results;
-                    console.log(datum)
-                    setNetData(datum)
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
+        setNetData({loading: true, data: null, error: false,})
+        axios.get(url4)
+            .then(response => {
+                let datum =  response.data.results;
+                setNetData({loading: false, data: datum, error: false,})
+            })
+            .catch((error) => {
+                console.error(error)
+                setNetData({loading: false, data: null, error: true,})
+            })
         }, [url4])
 
-    if (newData) {
-        var datan = newData.slice(0, 20)
+    let list = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+
+    if (newData.loading) {
+        content1 =
+            list.map((i, key) => 
+            <Grid item xs={9} sm={6} md={3}> 
+                <CustomCard
+                    type={'movie'}
+                    classes={classes}
+                    image={load}
+                    title={'Title'}
+                    date={'0000-00-00'}
+                    id={i}
+                />
+            </Grid>
+        )
+    }
+
+    if (newData.data) {
+        var datan = newData.data.slice(0, 15)
         content1 = 
         datan.map((datum, key) => 
             <Grid item xs={9} sm={6} md={3}> 
                 <CustomCard
                     type={'movie'}
                     classes={classes}
-                    image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
+                    image={'https://image.tmdb.org/t/p/original'+ datum.poster_path}
                     title={datum.original_title}
                     date={datum.release_date}
                     id={datum.id}
@@ -198,15 +185,32 @@ function Body() {
         )
     }
 
-    if (popData) {
-        var data = popData.slice(0, 25)
+
+    if (popData.loading) {
+        content2 =
+            list.map((i, key) => 
+            <Grid item xs={9} sm={6} md={3}> 
+                <CustomCard
+                    type={'movie'}
+                    classes={classes}
+                    image={load}
+                    title={'Title'}
+                    date={'0000-00-00'}
+                    id={i}
+                />
+            </Grid>
+        )
+    }
+
+    if (popData.data) {
+        var dated = popData.data.slice(0, 15)
         content2 = 
-        data.map((datum, key) => 
+        dated.map((datum, key) => 
             <Grid item xs={12} sm={6} md={3}>
                 <CustomCard
                     type={'tv'}
                     classes={classes}
-                    image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
+                    image={'https://image.tmdb.org/t/p/original'+ datum.poster_path}
                     title={datum.original_name}
                     date={datum.first_air_date}
                     id={datum.id}
@@ -215,15 +219,31 @@ function Body() {
         )
     }
 
-    if (airData) {
-        var adata = airData.slice(0, 25)
+    if (airData.loading) {
+        content3 =
+            list.map((i, key) => 
+            <Grid item xs={9} sm={6} md={3}> 
+                <CustomCard
+                    type={'movie'}
+                    classes={classes}
+                    image={load}
+                    title={'Title'}
+                    date={'0000-00-00'}
+                    id={i}
+                />
+            </Grid>
+        )
+    }
+
+    if (airData.data) {
+        var adata = airData.data.slice(0, 25)
         content3 = 
         adata.map((datum, key) => 
             <Grid item xs={12} sm={6} md={3}>
                 <CustomCard
                     type={'tv'}
                     classes={classes}
-                    image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
+                    image={'https://image.tmdb.org/t/p/original'+ datum.poster_path}
                     title={datum.original_name}
                     date={datum.first_air_date}
                     id={datum.id}
@@ -232,15 +252,31 @@ function Body() {
         )
     }
 
-    if (netData) {
-        var netdata = netData.slice(0, 25)
+    if (netData.loading) {
+        content4 =
+            list.map((i, key) => 
+            <Grid item xs={9} sm={6} md={3}> 
+                <CustomCard
+                    type={'movie'}
+                    classes={classes}
+                    image={load}
+                    title={'Title'}
+                    date={'0000-00-00'}
+                    id={i}
+                />
+            </Grid>
+        )
+    }
+
+    if (netData.data) {
+        var netdata = netData.data.slice(0, 15)
         content4 = 
         netdata.map((datum, key) => 
             <Grid item xs={12} sm={6} md={3}>
                 <CustomCard
                     type={'tv'}
                     classes={classes}
-                    image={'https://image.tmdb.org/t/p/original' + datum.poster_path}
+                    image={'https://image.tmdb.org/t/p/original'+ datum.poster_path}
                     title={datum.original_name}
                     date={datum.first_air_date}
                     id={datum.id}
@@ -252,56 +288,10 @@ function Body() {
     return (
         <div className={styles.mainBody}>
              <Grid container spacing={number}>
-                 <Grid item xs={12}>
-                    <Paper className={styles.paper}>
-                         <div className="header">
-                            <Typography className={styles.heading} variant="h4">
-                                <Link to="/category/movie/popular">
-                                    Trending Movies
-                                </Link>
-                            </Typography>
-                         </div>
-                         <Box className={styles.gridList}>
-                             {content1}
-                         </Box>
-                     </Paper>
-                 </Grid>
-                 <Grid item xs={12}>
-                    <Paper className={styles.paper}>
-                         <Typography className={styles.heading} variant="h4">
-                            <Link to="/category/tv/popular">
-                                Trending On Tv
-                            </Link>
-                         </Typography>
-                         <Box className={styles.gridList}>
-                             {content2}
-                         </Box>
-                    </Paper>
-                 </Grid>
-                 <Grid item xs={12}>
-                    <Paper className={styles.paper}>
-                        <Typography className={styles.heading} variant="h4">
-                            <Link to="/category/tv/upcoming">
-                                Airing Today on Tv
-                            </Link>
-                         </Typography>
-                         <Box className={styles.gridList}>
-                             {content3}
-                         </Box>
-                    </Paper> 
-                 </Grid>
-                 <Grid item xs={12}>
-                    <Paper className={styles.paper}>
-                        <Typography className={styles.heading} variant="h4">
-                            <Link to="/category/tv/upcoming">
-                                Hot off Netflix
-                            </Link>
-                         </Typography>
-                         <Box className={styles.gridList}>
-                             {content4}
-                         </Box>
-                    </Paper> 
-                 </Grid>
+                 <GridItem content={content1} name={"What's Trending in Movies"} />
+                 <GridItem content={content2} name={"What's Trending on TV"} />
+                 <GridItem content={content4} name={"Hot on Netflix"} />
+                 <GridItem content={content3} name={"Airing Today on Tv"} />
              </Grid>
         </div>
     )

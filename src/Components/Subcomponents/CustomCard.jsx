@@ -1,5 +1,6 @@
 import { Card, CardMedia, Typography, CardContent } from "@material-ui/core";
 import { Link } from 'react-router-dom';
+import load from '../load.gif'
 
 function CustomCard(props){
     const type = props.type;
@@ -15,7 +16,7 @@ function CustomCard(props){
             <Card className={classes.root}>
                 <CardMedia
                     className={classes.media}
-                    image={image}
+                    image={image || load}
                     component="img"
                 />
                 <CardContent className={classes.content}>

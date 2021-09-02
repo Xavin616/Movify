@@ -4,12 +4,12 @@ import axios from 'axios';
 import { makeStyles } from '@material-ui/styles';
 import Catalogue from './Subcomponents/Catalogue'
 import { Button, Paper, Typography } from '@material-ui/core';
-//import { useMediaQuery } from './Subcomponents/Query';
-import SearchIcon from '@material-ui/icons/Search';
+import { movie_genres, tv_genres } from './Subcomponents/GenreList';
+import SearchInput from './Subcomponents/SearchInput';
 
 const useStyles = makeStyles((theme) => ({
     contcat: {
-        padding: 15,
+        padding: 8,
         width: 100+'%',
         display: 'flex',
         justifyContent: 'space-around',
@@ -22,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
     searchPanel: {
         //minWidth: 25+'%',
         margin: '10px 8px 5px 0px',
-        padding: 25,
-        width: 75+'%',
+        padding: 29,
+        width: 23+'%',
         flexGrow: 1,
         height: 'fit-content',
         backgroundColor: '#000000c9',
@@ -36,27 +36,14 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     catalogue: {
-        padding: 2,
+        padding: 5,
         marginTop: 2,
-        minWidth: 50+'%',
+        width: 77+'%',
         flexGrow: 1,
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
             padding: 0,
         },
-    },
-    searchInput: {
-        height: 38,
-        background: '#0D353F',
-        border: 'none',
-        outline: 'none',
-        padding: '13px',
-        borderRadius: 8,
-        color: '#ebfcff',
-        fontSize: '0.98em',
-        '&::placeholder':{
-            color: '#c3f5fd',
-        }
     },
     select: {
         backgroundColor: '#0D353F',
@@ -97,19 +84,88 @@ function Category(props) {
     const pop_url  = `https://api.themoviedb.org/3/${media}/popular?api_key=546988151aeca0994227ca10917c13db&language=en-US`
     //const isMediaSmall = useMediaQuery('(max-width:400px)')
 
+    const mainGenres = (media === 'tv' ? tv_genres : movie_genres)
     const classes = useStyles()
 
-    const [data, setData] = useState(null)
+    const [data, setData] = useState({loading: false, data: null, error: false,})
+    const [date, setDate] = useState({
+        from: '',
+        to: '',
+    })
+    const [name, setName] = useState('');
+    const [genre, setGenre] = useState(null)
+    const [category, setCategory] = useState('popular')
+    const [checked, setChecked] = useState(
+        new Array(mainGenres.length).fill(false)
+    )
+
     useEffect(() => {
+        setData({loading: true, data: null, error: false,})
         axios.get(pop_url)
         .then(response => {
-            setData(response.data.results)
+            setData({loading: false, data: response.data.results, error: false,})
         })
     }, [pop_url])
 
+    const handleSubmitName = (e) => {
+        e.preventDefault()
+        console.log(name);
+        console.log(searchUrl)
+        setData({loading: true, data: null, error: false,})
+        axios.get(searchUrl)
+            .then(response => {
+                console.log(response.data);
+                setData({loading: false, data: response.data.results, error: false,})
+            })
+    };
+
+    const handleSubmitCategory = (e) => {
+        e.preventDefault()
+        console.log(category);
+        setData({loading: true, data: null, error: false,})
+        axios.get(categoryUrl)
+            .then(response => {
+                setData({loading: false, data: response.data.results, error: false,})
+            })
+    };
+
+    const handleGenre = position => {
+        const updatedCheck = checked.map((item, index) => 
+            index === position ? !item : item
+        );
+
+        setChecked(updatedCheck);
+
+        const list = []
+        const genrelist = updatedCheck.map((item, key) => {
+            if (item === true) {
+                list.push(mainGenres[key].id)
+                return list
+            } 
+            else { 
+                return list
+            }
+        })
+        setGenre(genrelist[0])
+    }
+
     let categoryList;
+    let content;
 
     if (media === 'movie') {
+        content = movie_genres.map((genre, key) => 
+            <label>
+                <input 
+                    type='checkbox'
+                    style={{padding: 5, margin: '5px 8px',}} 
+                    name={genre.name} 
+                    value={genre.id}
+                    checked={checked[key]}
+                    onChange={(e) => handleGenre(key)}                    
+                />
+                {genre.name}
+            </label>
+        )
         categoryList = 
             <select 
                 onChange={(e) => {setCategory(e.target.value); console.log(e.target.value)}} 
@@ -124,6 +180,19 @@ function Category(props) {
                 <option value="latest">Latest</option>
             </select>
     } else {
+        content = tv_genres.map((genre, key) => 
+            <label>
+                <input 
+                    type='checkbox'
+                    style={{padding: 5, margin: '5px 8px',}} 
+                    name={genre.name} 
+                    value={genre.id}
+                    checked={checked[key]}
+                    onChange={(e) => handleGenre(key)}                    
+                />
+                {genre.name}
+            </label>
+        )
         categoryList =
         <select 
             onChange={(e) => {setCategory(e.target.value); console.log(e.target.value)}} 
@@ -138,96 +207,95 @@ function Category(props) {
         </select>
     }
 
-    const [name, setName] = useState('');
-    const [category, setCategory] = useState('popular')
-    //const [genre, setGenre] = useState(null)
+    const categoryUrl = `https://api.themoviedb.org/3/${media}/${category}?api_key=546988151aeca0994227ca10917c13db&language=en-US`
+    const searchUrl = `https://api.themoviedb.org/3/search/${media}?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1&query=${name}`
+    const discoverUrl = `https://api.themoviedb.org/3/discover/${media}?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1`
 
-    const handleSubmitName = (e) => {
+
+    const getDate = (date) => {
+        let to;
+        let from;
+        if (date.to && date.from) {
+            to = `&primary_release_date.lte=${date.to}`
+            from = `&primary_release_date.gte=${date.from}`
+            const dateString = from + to;
+            return dateString
+        } else if (date.to && !date.from) {
+            to = `&primary_release_date.lte=${date.to}`
+            return to
+        } else if (date.from && !date.to) {
+            from = `&primary_release_date.gte=${date.from}`
+            return from
+        } else { return null }
+    }
+
+    function handleDiscover(e) {
         e.preventDefault()
-        console.log(name);
-        console.log(search_url)
-        axios.get(search_url)
-            .then(response => {
-                console.log(response.data);
-                setData(response.data.results)
-            })
-    };
-
-    const handleSubmitCategory = (e) => {
-        e.preventDefault()
-        console.log(category);
-        axios.get(category_url)
-            .then(response => {
-                console.log(response.data);
-                setData(response.data.results)
-            })
-    };
-
-    const category_url = `https://api.themoviedb.org/3/${media}/${category}?api_key=546988151aeca0994227ca10917c13db&language=en-US`
-    const search_url = `https://api.themoviedb.org/3/search/${media}?api_key=546988151aeca0994227ca10917c13db&language=en-US&page=1&query=${name}`
+        console.log(genre);
+        console.log(getDate(date));
+        if (genre !== null && getDate !== null) {
+            let newDiscoverUrl = discoverUrl+`&with_genres=[${genre}]`+getDate(date)
+            axios.get(newDiscoverUrl)
+                .then(response => {
+                    setData(response.data.results)
+                })
+        }
+    }
 
     return ( 
         <div className={classes.contcat}>
             <Paper className={classes.searchPanel}>
                 <div>
-                    <Typography 
-                        component={'h3'} 
-                        variant={'h5'}
-                        className={classes.header}
+                    <SearchInput name={name} submit={handleSubmitName} onchange={(e)=> {setName(e.target.value)}} />
+                    <br />
+                    <form 
+                        onSubmit={handleSubmitCategory}
                     >
-                        Discover
-                    </Typography>
-                        <form 
-                            style={{
-                                position: 'relative',
-                                display: 'flex',
-                                flexDirection: 'column',}}
-                            onSubmit={handleSubmitName}
+                        <Typography 
+                            component={'h3'} 
+                            variant={'h6'}
+                            className={classes.header}
                         >
-                            <input
-                                className={classes.searchInput}
-                                placeholder="Search by Name" 
-                                type="text"
-                                value={name} 
-                                onChange={(e) => setName(e.target.value)} 
-                            />
-                            <button type='submit' 
-                                style={{
-                                        backgroundColor: 'transparent',
-                                        color: 'white',
-                                        border: 'none',
-                                        position: 'absolute',
-                                        borderRadius: '25px',
-                                        padding: 2,
-                                        left: 85+'%',
-                                        top: '6px',
-                                    }}>
-                                <SearchIcon 
-                                    style={{
-                                        
-                                    }}
-                                    size='large'
-                                />
-                            </button>
-                        </form>
-                        <br />
-                        <form 
-                            onSubmit={handleSubmitCategory}
-                            >
-                            <Typography 
-                                component={'h3'} 
-                                variant={'h6'}
-                                className={classes.header}
-                            >
-                                Category
-                            </Typography>
+                            Category
+                        </Typography>
+                        <div>
                             {categoryList}
-                            {/*<div className="filter-wrapper">
-                                Genres
-                                    <input type="radio" name="genre1" id="action" value="action" onChange={(e) => setGenre(e.target.value)} />
-                                    <input type="radio" name="genre2" id="horror" value="horror" onChange={(e) => setGenre(e.target.value)} />
-                                    <input type="radio" name="genre3" id="comedy" value="comedy" onChange={(e) => setGenre(e.target.value)} />
-                            </div>*/}
+                        </div>
+                        <Button className={classes.submitButton} type="submit">Search</Button>
+                    </form>
+                    <form onSubmit={handleDiscover}>
+                        <Typography 
+                            component={'h3'} 
+                            variant={'h6'}
+                            className={classes.header}
+                        >
+                            Discover
+                        </Typography>
+                        <div 
+                            style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap',}} 
+                            className="filter-wrapper"
+                        >
+                            {content}
+                        </div>
+                        <br />
+                            <div>
+                                <label htmlFor="from">
+                                    From:
+                                    <input 
+                                        type="date" 
+                                        value={date}
+                                        onChange={(e) => setDate({...date, from: e.target.value,})}  
+                                        name="from" id="from" />
+                                </label>
+                                <label htmlFor="to">
+                                    To: 
+                                    <input 
+                                        type="date" 
+                                        value={date}
+                                        onChange={(e) => setDate({...date, to: e.target.value})}  
+                                        name="to" id="to" />
+                                </label>
+                            </div>
                             <Button className={classes.submitButton} type="submit">Search</Button>
                     </form>
                 </div>

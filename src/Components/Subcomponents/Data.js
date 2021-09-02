@@ -1,4 +1,4 @@
-export const data = [
+export const datum = [
     {
         "backdrop_path": "/jOJP93WpQrmSXX16lQCNulwuUVO.jpg",
         "first_air_date": "2021-06-09",

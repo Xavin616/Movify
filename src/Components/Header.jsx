@@ -10,17 +10,17 @@ import { useState } from "react";
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1, 
-        padding: '6px 6px 0px 6px',
+        padding: '12px 12px 0px 12px',
         display: 'inline-flex',
         flexDirection: 'row',
     },
     title: {
         flexGrow: 0,
         padding: 5,
-        margin: '5px 10px 10px 45px',
+        margin: '3px 10px 10px 45px',
         fontFamily: 'Pacifico, cursive',
         color: 'cyan',
-        fontSize: '1.6em',
+        fontSize: '1.78em',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
             margin: '10px -30px 0px 2.5px',
@@ -31,8 +31,12 @@ const useStyles = makeStyles((theme) => ({
     tabName: {
         textTransform: 'none',
         fontWeight: 'bold',
-        fontSize: '0.95em',
+        fontSize: '1.1em',
         fontFamily: 'Source Sans Pro, san serif ',
+        // eslint-disable-next-line
+        ['@media (max-width:400px)']: {
+            fontSize: '0.95em',
+        },
     }
 }))
 
