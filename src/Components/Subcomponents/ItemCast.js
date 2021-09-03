@@ -8,7 +8,7 @@ const useCss = makeStyles((theme) => ({
     paper: {
         height: 'auto',
         padding: '5px 10px 2px 12px',
-        background: 'linear-gradient(0deg, #050c10 35%, #00c9c9)',
+        background: 'linear-gradient(0deg, #050c10 35%, #005252)',
         backgroundBlendMode: 'multiply',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
@@ -28,7 +28,7 @@ const useCss = makeStyles((theme) => ({
 const useStyles = makeStyles((theme) =>({
     root:{
         width: 140,
-        height: 91.5+'%',
+        height: 93.5+'%',
         backgroundColor: 'black',
         color: 'white',
         margin: 10,
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) =>({
         padding: '12px 13px 8px 15px',
     },
     title: {
-        fontSize: '1.1em',
+        fontSize: '1.05em',
         fontWeight: 'bold',
         fontFamily: 'Source Sans Pro, sans-serif',
         // eslint-disable-next-line
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) =>({
     },
     date:{
         textDecoration: 'italize',
-        fontSize: '0.88em',
+        fontSize: '0.82em',
     },
 }))
 

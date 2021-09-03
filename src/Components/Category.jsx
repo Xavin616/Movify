@@ -1,11 +1,70 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles, withStyles } from '@material-ui/styles';
 import Catalogue from './Subcomponents/Catalogue'
 import { Button, Paper, Typography } from '@material-ui/core';
 import { movie_genres, tv_genres } from './Subcomponents/GenreList';
 import SearchInput from './Subcomponents/SearchInput';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MuiAccordion from '@material-ui/core/Accordion';
+import MuiAccordionDetails from '@material-ui/core/AccordionDetails'
+import MuiAccordionSummary from '@material-ui/core/AccordionSummary'
+
+
+const Accordion = withStyles({
+    root: {
+        margin: 18,
+        backgroundColor: 'transparent',
+        color: 'white',
+        '&:not(:last-child)': {
+        borderBottom: 0,
+      },
+      '&:before': {
+        display: 'none',
+      },
+        // eslint-disable-next-line
+        ['@media (max-width: 450px)']:{
+            margin: 12,
+        },
+    },
+    expanded: {},
+  })(MuiAccordion);
+  
+  const AccordionSummary = withStyles({
+    root: {
+      boxShadow: '0 2px 8px rgb(130 230 207 / 10%)',
+      backgroundColor: '#0D353F',
+      borderRadius: 5,
+      marginBottom: -1,
+      minHeight: 45,
+      '&$expanded': {
+        minHeight: 45,
+      },
+    },
+    content: {
+        backgroundColor: '#0D353F',
+        display: 'block',
+        margin: 0,
+      '&$expanded': {
+        margin: 0,
+      },
+    },
+    expanded: {},
+  })(MuiAccordionSummary);
+  
+  const AccordionDetails = withStyles((theme) => ({
+    root: {
+        backgroundColor: '#001b22',
+        display: 'block',
+      padding: theme.spacing(1.5),
+    },
+    content: {
+        backgroundColor: '#060806',
+        display: 'block',
+        margin: 0,
+      },
+  }))(MuiAccordionDetails);
 
 const useStyles = makeStyles((theme) => ({
     contcat: {
@@ -23,12 +82,18 @@ const useStyles = makeStyles((theme) => ({
         //minWidth: 25+'%',
         margin: '10px 8px 5px 0px',
         padding: 29,
-        width: 23+'%',
+        width: 25+'%',
         flexGrow: 1,
         height: 'fit-content',
-        backgroundColor: '#000000c9',
+        backgroundColor: '#060806',
         boxShadow: '0px 6px 15px #060810',
         color: 'white',
+        // eslint-disable-next-line
+        ['@media (max-width: 700px)']:{
+            width: 36+'%',
+            padding: 17,
+            margin: '12px 0',
+        },
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
             width: 100+'%',
@@ -46,19 +111,25 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     select: {
-        backgroundColor: '#0D353F',
+        backgroundColor: '#060806',
         color: '#ebfcff',
         height: 35,
-        border: 'none',
-        width: 70+'%',
-        padding: '5px 15px 5px 20px',
-        appearance: 'none',
-        borderRadius: 5,
-        fontSize: '1.1em',
+        borderTop: 'none',
+        borderRight: 'none',
+        borderLeft: 'none',
+        borderBottom: '2px solid cyan',
+        width: 80+'%',
+        padding: '5px 10px -25px 2px',
+        appearance: 'white',
+        fontSize: '1.7em',
         marginBottom: 10,
     },
+    options:{
+        fontSize: '0.8em',
+    },
     header: {
-        fontWeight: '400',
+        fontSize: '1.33em',
+        fontWeight: '300',
         padding: '2px 2px 8px 2px',
         fontFamily: 'Source Sans Pro, san-serif',
     },
@@ -173,11 +244,11 @@ function Category(props) {
                 id="category"
                 className={classes.select}
             >
-                <option value="popular">Popular</option>
-                <option value="top_rated">Top Rated</option>
-                <option value="now_playing">Now Playing</option>
-                <option value="upcoming">Upcoming</option>
-                <option value="latest">Latest</option>
+                <option className={classes.options} value="popular">Popular</option>
+                <option className={classes.options} value="top_rated">Top Rated</option>
+                <option className={classes.options} value="now_playing">Now Playing</option>
+                <option className={classes.options} value="upcoming">Upcoming</option>
+                <option className={classes.options} value="latest">Latest</option>
             </select>
     } else {
         content = tv_genres.map((genre, key) => 
@@ -200,10 +271,10 @@ function Category(props) {
             id="category"
             className={classes.select}
         >
-            <option value="popular">Popular</option>
-            <option value="top_rated">Top Rated</option>
-            <option value="airing_today">Airing Today</option>
-            <option value="latest">Latest</option>
+            <option className={classes.options} value="popular">Popular</option>
+            <option className={classes.options} value="top_rated">Top Rated</option>
+            <option className={classes.options} value="airing_today">Airing Today</option>
+            <option className={classes.options} value="latest">Latest</option>
         </select>
     }
 
@@ -246,58 +317,68 @@ function Category(props) {
         <div className={classes.contcat}>
             <Paper className={classes.searchPanel}>
                 <div>
-                    <SearchInput name={name} submit={handleSubmitName} onchange={(e)=> {setName(e.target.value)}} />
-                    <br />
-                    <form 
-                        onSubmit={handleSubmitCategory}
-                    >
-                        <Typography 
-                            component={'h3'} 
-                            variant={'h6'}
-                            className={classes.header}
-                        >
-                            Category
-                        </Typography>
-                        <div>
-                            {categoryList}
-                        </div>
-                        <Button className={classes.submitButton} type="submit">Search</Button>
-                    </form>
-                    <form onSubmit={handleDiscover}>
-                        <Typography 
-                            component={'h3'} 
-                            variant={'h6'}
-                            className={classes.header}
-                        >
-                            Discover
-                        </Typography>
-                        <div 
-                            style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap',}} 
-                            className="filter-wrapper"
-                        >
-                            {content}
-                        </div>
-                        <br />
-                            <div>
-                                <label htmlFor="from">
-                                    From:
-                                    <input 
-                                        type="date" 
-                                        value={date}
-                                        onChange={(e) => setDate({...date, from: e.target.value,})}  
-                                        name="from" id="from" />
-                                </label>
-                                <label htmlFor="to">
-                                    To: 
-                                    <input 
-                                        type="date" 
-                                        value={date}
-                                        onChange={(e) => setDate({...date, to: e.target.value})}  
-                                        name="to" id="to" />
-                                </label>
-                            </div>
-                            <Button className={classes.submitButton} type="submit">Search</Button>
-                    </form>
+                    <Accordion>
+                            <form 
+                                onSubmit={handleSubmitCategory}
+                            >
+                                <div>
+                                    {categoryList}
+                                </div>
+                                {/*<Button className={classes.submitButton} type="submit">Search</Button>*/}
+                            </form>
+                    </Accordion>
+                    <Accordion>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon style={{color: 'white',}} />}>
+                            <Typography component={'h4'} variant={'h6'} className={classes.header}>
+                                Search by Name
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <SearchInput name={name} submit={handleSubmitName} onchange={(e)=> {setName(e.target.value)}} />
+                        </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon style={{color: 'white',}} />}>
+                            <Typography 
+                                    component={'h4'} 
+                                    variant={'h6'}
+                                    className={classes.header}
+                                >
+                                    Discover
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <form onSubmit={handleDiscover}>
+                                
+                                <div 
+                                    style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap',}} 
+                                    className="filter-wrapper"
+                                >
+                                    {content}
+                                </div>
+                                <br />
+                                    <div>
+                                        <label htmlFor="from">
+                                            From:
+                                            <input 
+                                                type="date" 
+                                                value={date}
+                                                onChange={(e) => setDate({...date, from: e.target.value,})}  
+                                                name="from" id="from" />
+                                        </label>
+                                        <label htmlFor="to">
+                                            To: 
+                                            <input 
+                                                type="date" 
+                                                value={date}
+                                                onChange={(e) => setDate({...date, to: e.target.value})}  
+                                                name="to" id="to" />
+                                        </label>
+                                    </div>
+                                    <Button className={classes.submitButton} type="submit">Search</Button>
+                            </form>
+                        </AccordionDetails>
+                    </Accordion>
                 </div>
             </Paper>
             <div className={classes.catalogue}>

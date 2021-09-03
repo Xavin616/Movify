@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '10px 10px',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
-            padding: '0px 0px',
+            padding: 0,
         },
         display: 'flex',
         flexDirection: 'column',
@@ -53,7 +53,7 @@ const useCardStyles = makeStyles((theme) => ({
         },
     },
     content: {
-        padding: '15px 5px 5px 14px', 
+        padding: '15px 5px 5px 9px', 
         marginTop: 5, 
         backgroundColor: 'transparent',
         color: 'white',

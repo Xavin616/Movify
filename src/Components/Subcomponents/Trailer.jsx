@@ -1,8 +1,6 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import { Paper, Typography, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import axios from 'axios';
 import VideoComp from './VideoComp';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,22 +25,9 @@ const useStyles = makeStyles((theme) => ({
 
 function Trailer(props) {
     const classes = useStyles();
-    const str = props.media;
-    const id = props.id;
-
-    let vidurl = `https://api.themoviedb.org/3/${str}/${id}/videos?api_key=546988151aeca0994227ca10917c13db&language=en-US`
-    
-    // State management: Trailer Videos
-    const [vid, setVid] = useState(null);
-    //eslint-disable-next-line
-        useEffect(() => {
-            axios.get(vidurl)
-                .then(response => {
-                    console.log(response.data);
-                    let viddata = response.data.results;
-                    setVid(viddata);
-                })
-        }, [vidurl])
+    //const str = props.media;
+    //const id = props.id;
+    const vid = props.vid;
 
     let trailer_list;
 

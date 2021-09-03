@@ -1,14 +1,15 @@
 import React from 'react'
-import SearchIcon from '@material-ui/icons/Search';
+//import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme) => ({
     searchInput: {
-        height: 38,
-        background: '#0D353F',
+        width: 100+'%',
+        height: 40,
+        background: 'black',
         border: 'none',
         outline: 'none',
-        padding: '13px',
+        padding: '15px',
         borderRadius: 8,
         color: '#ebfcff',
         fontSize: '0.98em',
@@ -25,12 +26,7 @@ function SearchInput(props) {
     const change = props.onchange;
 
     return (
-        <div>
-            <form 
-                style={{
-                    position: 'relative',
-                    display: 'flex',
-                    flexDirection: 'column',}}
+            <form
                 onSubmit={submit}
             >
                 <input
@@ -40,7 +36,7 @@ function SearchInput(props) {
                     value={name} 
                     onChange={change} 
                 />
-                <button 
+                {/*<button 
                     type='submit' 
                     style={{
                         backgroundColor: 'transparent',
@@ -49,16 +45,14 @@ function SearchInput(props) {
                         position: 'absolute',
                         borderRadius: '25px',
                         padding: 2,
-                        left: 85+'%',
+                        left: 124+'%',
                         top: '6px',
                         cursor: 'pointer',
                     }}
                 >
                     <SearchIcon size='large'/>
-                </button>
+                </button>*/}
             </form>
-        </div>
-    )
-}
+    )}
 
 export default SearchInput

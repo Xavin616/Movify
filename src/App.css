@@ -37,4 +37,8 @@ a {
   .menulist {
     display: none;
   }
+  .MuiAccordionSummary-content {
+    display: block;
+    margin: 8px 0;
+  }
 }
