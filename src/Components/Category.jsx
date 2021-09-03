@@ -108,27 +108,25 @@ const useStyles = makeStyles((theme) => ({
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
             padding: 0,
+            width: '100%',
         },
     },
     select: {
         backgroundColor: '#060806',
         color: '#ebfcff',
         height: 35,
-        borderTop: 'none',
-        borderRight: 'none',
-        borderLeft: 'none',
-        borderBottom: '2px solid cyan',
+        border: 'none',
         width: 80+'%',
         padding: '5px 10px -25px 2px',
         appearance: 'white',
-        fontSize: '1.7em',
+        fontSize: '1.6em',
         marginBottom: 10,
     },
     options:{
         fontSize: '0.8em',
     },
     header: {
-        fontSize: '1.33em',
+        fontSize: '1.20em',
         fontWeight: '300',
         padding: '2px 2px 8px 2px',
         fontFamily: 'Source Sans Pro, san-serif',
