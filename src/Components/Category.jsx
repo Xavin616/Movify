@@ -10,7 +10,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails'
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary'
-
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 const Accordion = withStyles({
     root: {
@@ -112,18 +112,52 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     select: {
+        marginTop: 7,
         backgroundColor: '#060806',
         color: '#ebfcff',
-        height: 35,
+        height: 30,
         border: 'none',
-        width: 80+'%',
-        padding: '5px 10px -25px 2px',
+        width: 82+'%',
         appearance: 'white',
         fontSize: '1.6em',
         marginBottom: 10,
+        padding: '0px 0px 0px 0px',
+        outline:'none',
     },
     options:{
-        fontSize: '0.8em',
+        fontSize: '0.7em',
+    },
+    labelcheck: {
+        display: 'block',
+        position: 'relative',
+        margin: '2px 12px 1.5px 0px',
+        cursor: 'pointer',
+        fontFamily: 'Source Sans Pro, sans-serif',
+        fontSize: '16.5px',
+        '&:input': {
+            position: 'absolute',
+            opacity: 0,
+            cursor: 'pointer',
+        },
+    },
+    checkbox: {
+        position: 'relative',
+        left: 0,
+        top: 4,
+        borderRadius: '50%',
+        height: 18,
+        width: 18,
+        margin:0,
+        '&::checked': {
+            backgroundColor: 'cyan',
+        }
+    },
+    dateInput:{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignContent: 'normal',
+        fontFamily: 'Source Sans Pro, sans-serif',
+        marginBottom: 5,
     },
     header: {
         fontSize: '1.20em',
@@ -158,8 +192,8 @@ function Category(props) {
 
     const [data, setData] = useState({loading: false, data: null, error: false,})
     const [date, setDate] = useState({
-        from: '',
-        to: '',
+        from: '0000-00-00',
+        to: '0000-00-00',
     })
     const [name, setName] = useState('');
     const [genre, setGenre] = useState(null)
@@ -223,14 +257,15 @@ function Category(props) {
 
     if (media === 'movie') {
         content = movie_genres.map((genre, key) => 
-            <label>
+            <label className={classes.labelcheck}>
                 <input 
                     type='checkbox'
                     style={{padding: 5, margin: '5px 8px',}} 
                     name={genre.name} 
                     value={genre.id}
                     checked={checked[key]}
-                    onChange={(e) => handleGenre(key)}                    
+                    onChange={(e) => handleGenre(key)}
+                    className={classes.checkbox}                   
                 />
                 {genre.name}
             </label>
@@ -250,14 +285,15 @@ function Category(props) {
             </select>
     } else {
         content = tv_genres.map((genre, key) => 
-            <label>
+            <label className={classes.labelcheck}>
                 <input 
                     type='checkbox'
                     style={{padding: 5, margin: '5px 8px',}} 
                     name={genre.name} 
                     value={genre.id}
                     checked={checked[key]}
-                    onChange={(e) => handleGenre(key)}                    
+                    onChange={(e) => handleGenre(key)}
+                    className={classes.checkbox}
                 />
                 {genre.name}
             </label>
@@ -284,30 +320,31 @@ function Category(props) {
     const getDate = (date) => {
         let to;
         let from;
-        if (date.to && date.from) {
+        if (date.to !== '0000-00-00' && date.from !== '0000-00-00') {
             to = `&primary_release_date.lte=${date.to}`
             from = `&primary_release_date.gte=${date.from}`
             const dateString = from + to;
             return dateString
-        } else if (date.to && !date.from) {
+        } else if (date.to !== '0000-00-00' && date.from === '0000-00-00') {
             to = `&primary_release_date.lte=${date.to}`
-            return to
-        } else if (date.from && !date.to) {
+            return to+'yes'
+        } else if (date.from !== '0000-00-00' && date.to === '0000-00-00') {
             from = `&primary_release_date.gte=${date.from}`
             return from
-        } else { return null }
+        } else { return '' }
     }
 
     function handleDiscover(e) {
         e.preventDefault()
-        console.log(genre);
-        console.log(getDate(date));
         if (genre !== null && getDate !== null) {
-            let newDiscoverUrl = discoverUrl+`&with_genres=[${genre}]`+getDate(date)
+            let newDiscoverUrl = discoverUrl+`&with_genres=${genre}`+getDate(date)
+            console.log(newDiscoverUrl)
+            setData({loading: true, data: null, error: false,})
             axios.get(newDiscoverUrl)
                 .then(response => {
-                    setData(response.data.results)
-                })
+                    console.log(response.data.results);
+                    setData({loading: false, data: response.data.results, error: false,})
+            })
         }
     }
 
@@ -319,16 +356,27 @@ function Category(props) {
                             <form 
                                 onSubmit={handleSubmitCategory}
                             >
-                                <div>
+                                <div style={{display: 'flex',}}>
                                     {categoryList}
+                                    <button type='submit' 
+                                        style={{
+                                            width: '18%',
+                                            backgroundColor: '#0D353F',
+                                            color: 'white', 
+                                            border: 'none',
+                                            borderTopRightRadius: 5,
+                                            borderBottomRightRadius: 5,
+                                            }}
+                                    >
+                                        <ArrowForwardIcon fontSize={'small'}/>
+                                    </button>
                                 </div>
-                                {/*<Button className={classes.submitButton} type="submit">Search</Button>*/}
                             </form>
                     </Accordion>
                     <Accordion>
                         <AccordionSummary expandIcon={<ExpandMoreIcon style={{color: 'white',}} />}>
                             <Typography component={'h4'} variant={'h6'} className={classes.header}>
-                                Search {media} by name
+                                Search {(media === 'tv' ? 'tv shows' : media)} by name
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
@@ -349,26 +397,26 @@ function Category(props) {
                             <form onSubmit={handleDiscover}>
                                 
                                 <div 
-                                    style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap',}} 
+                                    style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', padding: 10,}} 
                                     className="filter-wrapper"
                                 >
                                     {content}
                                 </div>
                                 <br />
-                                    <div>
-                                        <label htmlFor="from">
-                                            From:
+                                    <div style={{display: 'flex',  padding: '0px 90px 10px 20px', flexDirection: 'column',}}>
+                                        <label htmlFor="from" className={classes.dateInput}>
+                                            <span>From:</span>
                                             <input 
                                                 type="date" 
-                                                value={date}
+                                                value={date.from}
                                                 onChange={(e) => setDate({...date, from: e.target.value,})}  
                                                 name="from" id="from" />
                                         </label>
-                                        <label htmlFor="to">
-                                            To: 
+                                        <label htmlFor="to"className={classes.dateInput}>
+                                            <span>To:</span> 
                                             <input 
                                                 type="date" 
-                                                value={date}
+                                                value={date.to}
                                                 onChange={(e) => setDate({...date, to: e.target.value})}  
                                                 name="to" id="to" />
                                         </label>

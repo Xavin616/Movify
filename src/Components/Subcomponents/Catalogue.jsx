@@ -53,9 +53,10 @@ const useCardStyles = makeStyles((theme) => ({
         ['@media (max-width: 400px)']:{
             width: '87%',
             margin: '15px 6px 5px 6px',
-            height: 240,
+            height: 205,
             position: 'relative',
             borderRadius: 10,
+            backgroundColor: 'transparent',
         },
     },
     media: {
@@ -75,9 +76,9 @@ const useCardStyles = makeStyles((theme) => ({
         color: 'white',
         // eslint-disable-next-line
         ['@media (max-width: 400px)']:{
-            padding: '110px 90px 20px 15px',
+            padding: '0px 90px 40px 15px',
             width: '100%',
-            height: '100%',
+            height: '42%',
             position: 'absolute',
             backgroundColor: '#06080670',
             bottom: 0,
@@ -92,8 +93,9 @@ const useCardStyles = makeStyles((theme) => ({
         color: 'white',
         // eslint-disable-next-line
         ['@media (max-width: 400px)']:{
-            marginTop: 20,
-            fontSize: '1.38em',
+            marginTop: 12,
+            marginBottom: 0.5,
+            fontSize: '0.98em',
             textShadow: '0px 1px 3px black',
         },
     },
@@ -103,7 +105,7 @@ const useCardStyles = makeStyles((theme) => ({
         // eslint-disable-next-line
         ['@media (max-width: 400px)']:{
             fontWeight: 'bold',
-            fontSize: '0.99em',
+            fontSize: '0.72em',
         },
     }
 
@@ -136,7 +138,6 @@ function Catalogue(props) {
     }
 
     if (data.data) {
-        console.log(data.data)
         content = 
             data.data.map((datum, key) =>
                 <CustomCard 
@@ -144,7 +145,7 @@ function Catalogue(props) {
                     classes={cardstyle}
                     image={datum.poster_path !== null ? 'https://image.tmdb.org/t/p/original'+  ( isPageSmall ? datum.backdrop_path : datum.poster_path) : load}
                     title={datum.original_title || datum.original_name}
-                    date={(!isPageSmall ? datum.release_date || datum.first_air_date : (datum.overview).slice(0,65)+'...')}
+                    date={(!isPageSmall ? datum.release_date || datum.first_air_date : (datum.overview).slice(0,80)+'...')}
                     id={datum.id}
                 />
         )
