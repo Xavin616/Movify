@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     mainBody: {
         flexGrow: 1,
         width: '100%',
-        padding: '10px 10px',
+        padding: '0px 0px',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
             padding: 0,
@@ -26,8 +26,8 @@ const useCardStyles = makeStyles((theme) => ({
         margin: '0px 7.5px',
         //minWidth: 162,
         width: 160,
-        height: 95+'%',
-        backgroundColor: 'transparent',
+        height: 95.5+'%',
+        backgroundColor: '#060806',
         border: 'none',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
@@ -53,7 +53,7 @@ const useCardStyles = makeStyles((theme) => ({
         },
     },
     content: {
-        padding: '15px 5px 5px 9px', 
+        padding: '18px 13px 15px 18px', 
         marginTop: 5, 
         backgroundColor: 'transparent',
         color: 'white',
@@ -84,7 +84,7 @@ function Body() {
     const isMediaSmall = useMediaQuery('(max-width: 400px)')
 
     let number;
-    (isMediaSmall ? number = 0 : number = 2)
+    (isMediaSmall ? number = 0 : number = 0)
 
     const styles = useStyles()
     const classes = useCardStyles()

@@ -12,23 +12,23 @@ function CustomCard(props){
     let url = `/${type}/${id}`
 
     return (
-       <Link to={url}>
-            <Card className={classes.root}>
-                <CardMedia
-                    className={classes.media}
-                    image={image || load}
-                    component="img"
-                />
-                <CardContent className={classes.content}>
-                    <Typography className={classes.title}>
-                        {title}
-                    </Typography>
-                    <Typography className={classes.date} variant={'footer'}>
-                        {date}
-                    </Typography>
-                </CardContent>
-            </Card>
-       </Link>
+                <Card className={classes.root}>
+                    <Link to={url}>
+                        <CardMedia
+                            className={classes.media}
+                            image={image || load}
+                            component="img"
+                        />
+                        <CardContent className={classes.content}>
+                            <Typography className={classes.title}>
+                                {title}
+                            </Typography>
+                            <Typography className={classes.date} variant={'footer'}>
+                                {date}
+                            </Typography>
+                        </CardContent>
+                    </Link>
+                </Card>
     );
 };
 

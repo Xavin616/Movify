@@ -5,9 +5,10 @@ import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
+        borderRadius: 0,
         height: 'auto',
-        padding: '5px 10px 2px 12px',
-        backgroundColor: '#000000bf',
+        padding: '15px 8px 8px 12px',
+        backgroundColor: '#0000009e',
         backgroundBlendMode: 'multiply',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
