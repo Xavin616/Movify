@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
     searchPanel: {
         //minWidth: 25+'%',
         margin: '10px 8px 5px 0px',
-        padding: 29,
+        padding: 25,
         width: 25+'%',
         flexGrow: 1,
         height: 'fit-content',

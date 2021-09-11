@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     btngrp: {
-        marginTop: '15px ',
+        marginTop: '10px ',
     },
     btn: {
         marginLeft: 10,
@@ -105,13 +105,13 @@ const useStyles = makeStyles((theme) => ({
         marginTop: -6,
         fontStyle: 'italic',
         marginLeft: 8,
-        marginBottom: 22,
+        marginBottom: 18,
     },
     properties: {
         padding: 0,
     },
     listProps: {
-        marginTop: 25,
+        marginTop: 21,
         textAlign: 'center',
         display: 'flex',
         padding: 0,
@@ -119,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         fontWeight: 'bold',
         fontFamily: 'Source Sans Pro, sans-serif',
-        margin: '0px 0px 15px 0px',
+        margin: '-1px 0px 15px 0px',
         width: 100 + '%',
         // eslint-disable-next-line
         ['@media (max-width: 400px)']: {
@@ -131,7 +131,7 @@ const useStyles = makeStyles((theme) => ({
     },
     listItem:{
         listStyleType: 'none',
-        margin: '4px 8px 2px 8px',
+        margin: '2px 8px 2px 8px',
     },
     tab: {
         marginLeft: '8px',
@@ -159,6 +159,7 @@ function Main(props) {
     let image;
     let title;
     let tag;
+    let for_tv;
 
     const [item, setItem] = useState(null)
 
@@ -171,6 +172,8 @@ function Main(props) {
     }, [url])
 
     if (item) {
+        for_tv = (str === 'tv' ? <><li className={classes.listItem}>&#9679;<span className={classes.tab}>Seasons: {item.number_of_seasons}</span></li>
+        <li className={classes.listItem}>&#9679;<span className={classes.tab}>Episodes: {item.number_of_episodes}</span></li></>: '' )
         tag = item.tagline;
         //title = item.original_title;
         (str === 'movie' ? title = item.original_title : title = item.original_name);
@@ -184,6 +187,7 @@ function Main(props) {
             <li className={classes.listItem}>&#9679;<span className={classes.tab}>{item.spoken_languages === [] ? 'English' : (genrate(item.spoken_languages, 'english_name'))}</span></li>
             <li className={classes.listItem}>&#9679;<span className={classes.tab}>{genres}</span></li>
             <li className={classes.listItem}>&#9679;<span className={classes.tab}>Status: {item.status}</span></li>
+            {for_tv}
         </ul>
     }
 
