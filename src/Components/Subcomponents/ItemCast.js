@@ -6,19 +6,20 @@ import { makeStyles } from '@material-ui/styles';
 
 const useCss = makeStyles((theme) => ({
     paper: {
-        height: 'auto',
-        padding: '5px 10px 2px 12px',
+        height: 320,
+        padding: '10px 10px 2px 8px',
         background: 'linear-gradient(0deg, #050c10 35%, #005252)',
         backgroundBlendMode: 'multiply',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
+            height: 290,
             padding: '10px 5px 5px 0px',
         },
         overflow: 'hidden',
     },
     gridList: {
         width: 100 + '%',
-        height: 'max-content',
+        height: 'min-content',
         display: 'flex',
         padding: '4px 5px 0px 15px',
         overflow: 'scroll hidden',
@@ -27,22 +28,33 @@ const useCss = makeStyles((theme) => ({
 
 const useStyles = makeStyles((theme) =>({
     root:{
+        border: 'none',
+        boxShadow: 'none',
+        padding: 0,
         width: 140,
-        height: 93.5+'%',
-        backgroundColor: 'black',
+        height: 250,
+        backgroundColor: 'transparent',
         color: 'white',
-        margin: 10,
+        margin: '10px 14.5px',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
             width: 115,
         }
     },
     media: {
-        height: 70+'%',
+        height: 60+'%',
+        borderRadius: '60%',
+        // eslint-disable-next-line
+        ['@media (max-width:400px)']: {
+            borderRadius: '50%',
+            height: 50+'%',
+        }
     },
     content: {
+        backgroundPosition: 'center top',
+        textAlign: 'center',
         height: 30+'%',
-        padding: '12px 13px 8px 15px',
+        padding: '12px 5px 5px 5px',
     },
     title: {
         fontSize: '1.05em',
@@ -101,7 +113,7 @@ function ItemCast(props) {
                     style={{ 
                         fontFamily: 'Source Sans Pro, sans-serif', 
                         color: 'white', 
-                        fontSize: '1.89em',
+                        fontSize: '1.8em',
                         marginLeft: 8, 
                         fontWeight: 'bold', 
                         padding: '11.5px 4px 4px 14px',
