@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundBlendMode: 'multiply',
         // eslint-disable-next-line
         ['@media (max-width: 450px)']:{
-            padding: '10px 5px 5px 0px',
+            padding: '5px 5px 5px 0px',
         },
         overflow: 'hidden',
     },
@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
         ['@media (max-width:400px)']: {
             fontSize: '1.25em',
             fontWeight: 'bold',
+            marginTop: 6,
         },
         '&:hover': {
             color: 'cyan',
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
         width: 100 + '%',
         height: 'max-content',
         display: 'flex',
-        padding: '4px 5px 0px 15px',
+        padding: '2px 5px 0px 15px',
         overflow: 'scroll hidden',
     }
 }))

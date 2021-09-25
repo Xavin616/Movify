@@ -31,10 +31,10 @@ const useCardStyles = makeStyles((theme) => ({
         border: 'none',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
-            width: 120,
+            width: 130,
             margin: '0px 6px',
             borderRadius: 5,
-            height: 94+'%',
+            height: 93+'%',
         },
         transition: '0.2s',
         '&:hover': {
@@ -60,6 +60,7 @@ const useCardStyles = makeStyles((theme) => ({
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
             fontSize: '0.8em',
+            padding: '14px 13px 15px 12px',
         },
     },
     title: {
