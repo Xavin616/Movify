@@ -35,10 +35,11 @@ const useStyles = makeStyles((theme) =>({
         height: 250,
         backgroundColor: 'transparent',
         color: 'white',
-        margin: '10px 14.5px',
+        margin: '10px 25px 12px 5px ',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
-            width: 115,
+            margin: '10px 15px 12px 5px ',
+            width: 100,
         }
     },
     media: {
@@ -46,8 +47,8 @@ const useStyles = makeStyles((theme) =>({
         borderRadius: '60%',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
-            borderRadius: '50%',
-            height: 50+'%',
+            borderRadius: '40%',
+            height: 45+'%',
         }
     },
     content: {
@@ -113,7 +114,7 @@ function ItemCast(props) {
                     style={{ 
                         fontFamily: 'Source Sans Pro, sans-serif', 
                         color: 'white', 
-                        fontSize: '1.8em',
+                        fontSize: '1.6em',
                         marginLeft: 8, 
                         fontWeight: 'bold', 
                         padding: '11.5px 4px 4px 14px',

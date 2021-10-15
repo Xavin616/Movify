@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Trailer from './Subcomponents/Trailer';
 import Main from './Subcomponents/Main';
 import ItemCast from './Subcomponents/ItemCast';
+import Recommendations from './Subcomponents/Recommendations';
 import axios from 'axios';
 
 function ItemPage() {
@@ -26,6 +27,7 @@ function ItemPage() {
             <Main id={id} str={str} />
             <ItemCast id={id} str={str} />
             {(vid != null && vid.length !== 0) && <Trailer vid={vid} media={str} id={id} />}
+            <Recommendations id={id} media={str}/>
         </div>
     )
 }
