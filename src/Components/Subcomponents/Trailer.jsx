@@ -13,7 +13,19 @@ const useStyles = makeStyles((theme) => ({
             padding: 10,
         },
     },
-    
+    headline:{
+        color: 'white',
+        fontFamily: 'Source Sans Pro, sans-serif', 
+        fontSize: '1.6em', 
+        margin: '10px 0px 0px 8px', 
+        fontWeight: 'bold', 
+        padding: '11.5px 4px 4px 4px',
+        // eslint-disable-next-line
+        ['@media (max-width:400px)']: {
+            fontSize: '1.4em',
+            margin: '0px 0px 2px 8px',
+        },
+    },
     gridList: {
         width: 100 + '%',
         height: 'max-content',
@@ -42,7 +54,7 @@ function Trailer(props) {
         <div id="trailer">
             <Paper className={classes.paperContainer}>
                 <Typography 
-                    style={{ fontFamily: 'Source Sans Pro, sans-serif', fontSize: '1.6em', marginLeft: 8, fontWeight: 'bold', padding: '11.5px 4px 4px 4px',}}
+                    className={classes.headline}
                     variant={'h5'}
                 >
                     Trailers

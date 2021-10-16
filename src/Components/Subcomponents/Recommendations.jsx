@@ -11,6 +11,19 @@ const useStyles = makeStyles((theme) => ({
         padding: 5,
         height: 'auto',
     },
+    headline:{
+        color: 'white',
+        fontFamily: 'Source Sans Pro, sans-serif', 
+        fontSize: '1.6em', 
+        margin: '10px 0px 0px 8px', 
+        fontWeight: 'bold', 
+        padding: '11.5px 4px 4px 4px',
+        // eslint-disable-next-line
+        ['@media (max-width:400px)']: {
+            fontSize: '1.38em',
+            margin: '0px 0px 0px 8px',
+        },
+    },
     gridList: {
         display: 'flex',
         width: 100+'%',
@@ -109,7 +122,7 @@ function Recommendations(props) {
         <div>
             <Paper className={styles.paper}>
                 <Typography 
-                    style={{ color: 'white',fontFamily: 'Source Sans Pro, sans-serif', fontSize: '1.6em', margin: '10px 0px 0px 8px', fontWeight: 'bold', padding: '11.5px 4px 4px 4px',}}
+                    className={styles.headline}
                     variant={'h5'}
                 >
                     If you liked this {str === 'tv' ? 'Tv Series' : 'Movie'}

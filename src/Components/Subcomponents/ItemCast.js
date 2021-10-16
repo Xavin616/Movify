@@ -17,6 +17,19 @@ const useCss = makeStyles((theme) => ({
         },
         overflow: 'hidden',
     },
+    headline:{
+        color: 'white',
+        fontFamily: 'Source Sans Pro, sans-serif', 
+        fontSize: '1.6em', 
+        margin: '10px 0px 0px 8px', 
+        fontWeight: 'bold', 
+        padding: '11.5px 4px 4px 4px',
+        // eslint-disable-next-line
+        ['@media (max-width:400px)']: {
+            fontSize: '1.38em',
+            margin: '-1px 0px -2px 8px',
+        },
+    },
     gridList: {
         width: 100 + '%',
         height: 'min-content',
@@ -111,14 +124,7 @@ function ItemCast(props) {
         <div>
             <Paper className={styles.paper}>
                 <Typography 
-                    style={{ 
-                        fontFamily: 'Source Sans Pro, sans-serif', 
-                        color: 'white', 
-                        fontSize: '1.6em',
-                        marginLeft: 8, 
-                        fontWeight: 'bold', 
-                        padding: '11.5px 4px 4px 14px',
-                    }}
+                    className={styles.headline}
                     variant={'h5'}
                 >
                     Cast & Crew
