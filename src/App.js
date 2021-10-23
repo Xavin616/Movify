@@ -1,17 +1,16 @@
 import React from 'react';
-import Header from './Components/Header';
-import Body from './Components/Body'
-import Category from './Components/Category'
+import Header from './components/Header/index';
+import Body from './components/Body/index'
+import Category from './components/Category/index'
+import ItemPage from './components/Item/index';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css';
-import ItemPage from './Components/ItemPage';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from 'react-router-dom';
-import CssBaseline from '@material-ui/core/CssBaseline';
-
 
 const theme = createMuiTheme({
   palette: {

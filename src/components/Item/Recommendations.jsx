@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Paper, Grid, Typography} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
-import CustomCard from './CustomCard';
+import CustomCard from '../subcomponents/CustomCard';
 import axios from 'axios';
-import load from '../sideload.gif';
+import load from '../images/sideload.gif';
 
 const useStyles = makeStyles((theme) => ({
     paper: {

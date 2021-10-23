@@ -1,6 +1,6 @@
 import { Card, CardMedia, Typography, CardContent } from "@material-ui/core";
 import { Link } from 'react-router-dom';
-import load from '../load.gif'
+import load from '../images/load.gif'
 
 function CustomCard(props){
     const type = props.type;

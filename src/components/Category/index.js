@@ -2,10 +2,10 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { makeStyles, withStyles } from '@material-ui/styles';
-import Catalogue from './Subcomponents/Catalogue'
+import Catalogue from './Catalogue';
 import { Button, Paper, Typography } from '@material-ui/core';
-import { movie_genres, tv_genres } from './Subcomponents/GenreList';
-import SearchInput from './Subcomponents/SearchInput';
+import { movie_genres, tv_genres } from './GenreList';
+import SearchInput from './SearchInput';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails'

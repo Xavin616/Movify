@@ -1,8 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import { Paper } from '@material-ui/core';
-import CustomCard from './CustomCard';
-import load from '../load.gif';
+import CustomCard from '../subcomponents/CustomCard';
+import load from '../images/load.gif';
+import sideload from '../images/sideload.gif'
 import { useMediaQuery } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -158,7 +159,7 @@ function Catalogue(props) {
                 <CustomCard
                     type={'movie'}
                     classes={cardstyle}
-                    image={load}
+                    image={(isPageSmall ? sideload : load)}
                     title={'Title'}
                     date={'0000-00-00'}
                     id={i}

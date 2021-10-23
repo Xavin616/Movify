@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
-import CustomCard from './Subcomponents/CustomCard';
+import CustomCard from '../subcomponents/CustomCard';
 import axios from 'axios';
-import { useMediaQuery } from './Subcomponents/Query';
-import load from './load.gif'
-import GridItem from './Subcomponents/GridItem';
+import { useMediaQuery } from '@material-ui/core';
+import load from '../images/load.gif'
+import GridItem from './GridItem';
 
 const useStyles = makeStyles((theme) => ({
     mainBody: {

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Paper, Box, Grid, Typography } from '@material-ui/core';
-import CustomCard from './CustomCard';
+import CustomCard from '../subcomponents/CustomCard';
 import { makeStyles } from '@material-ui/styles';
 
 const useCss = makeStyles((theme) => ({

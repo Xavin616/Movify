@@ -4,7 +4,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core';
 import axios from 'axios';
-import { genrate } from './Query';
+import { genrate } from '../subcomponents/Query';
 
 const useStyles = makeStyles((theme) => ({
     paperContainer: {

@@ -1,10 +1,10 @@
 import React from "react";
-import { useMediaQuery } from "./Subcomponents/Query";
+import { useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import { AppBar, Typography, Tabs, Tab } from "@material-ui/core";
 //import { SearchRounded } from "@material-ui/icons";
 //import NotificationsIcon from '@material-ui/icons/Notifications';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({

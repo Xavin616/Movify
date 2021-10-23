@@ -1,9 +1,9 @@
 import { React, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Trailer from './Subcomponents/Trailer';
-import Main from './Subcomponents/Main';
-import ItemCast from './Subcomponents/ItemCast';
-import Recommendations from './Subcomponents/Recommendations';
+import Trailer from './Trailer';
+import Main from './Main';
+import ItemCast from './ItemCast';
+import Recommendations from './Recommendations';
 import axios from 'axios';
 
 function ItemPage() {
