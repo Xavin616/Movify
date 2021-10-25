@@ -15,12 +15,12 @@ const useStyles = makeStyles((theme) => ({
         color: 'white',
         fontFamily: 'Source Sans Pro, sans-serif', 
         fontSize: '1.6em', 
-        margin: '10px 0px 0px 8px', 
+        margin: '10px 0px 6px 8px', 
         fontWeight: 'bold', 
         padding: '11.5px 4px 4px 4px',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
-            fontSize: '1.38em',
+            fontSize: '1.2em',
             margin: '0px 0px 0px 8px',
         },
     },
@@ -29,12 +29,17 @@ const useStyles = makeStyles((theme) => ({
         width: 100+'%',
         overflow: 'scroll hidden',
         height: 'min-content',
+        paddingLeft: 15,
+        // eslint-disable-next-line
+        ['@media (max-width:400px)']: {
+            paddingLeft: 0,
+        },
     },
 }))
 
 const useCardSASS = makeStyles((theme) => ({
     root: {
-        margin: '0px 10px 5px 19px',
+        margin: '10px 10px 5px 19px',
         width: 300,
         height: 'auto',
         padding: 0,
@@ -43,6 +48,7 @@ const useCardSASS = makeStyles((theme) => ({
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
             width: 270,
+            margin: '0px 5px 5px 19px',
             padding: '10px 15px 10px 5px',
         },
     },
@@ -88,7 +94,7 @@ function Recommendations(props) {
 
     let mediaList;
 
-    if (recom) {
+    if (recom.length !== 0) {
         let list = recom.slice(0, 20);
         mediaList = list.map((result, key) => 
             <Grid item xs={9}>
@@ -101,38 +107,27 @@ function Recommendations(props) {
                 />
             </Grid>
         )
-    } else {
-        let list = [1,2,3,4,5,6,7,8,9,10]
-        mediaList = 
-            list.map((i, key) =>  
-                <Grid item xs={12} sm={6} md={3}>
-                    <CustomCard
-                        type={'movie'}
-                        classes={classes}
-                        image={load}
-                        title={'Title'}
-                        date={'0000-00-00'}
-                        id={i}
-                    />
-                </Grid>
-            )
+        return (
+            <div>
+                <Paper className={styles.paper}>
+                    <Typography 
+                        className={styles.headline}
+                        variant={'h5'}
+                    >
+                        If you liked this {str === 'tv' ? 'Tv Series' : 'Movie'}
+                    </Typography>
+                    <Box className={styles.gridList}>
+                        {mediaList}
+                    </Box>
+                </Paper>            
+            </div>
+        )
+    } else if (recom.length === 0) {
+        return (
+            <></>
+        )
     }
 
-    return (
-        <div>
-            <Paper className={styles.paper}>
-                <Typography 
-                    className={styles.headline}
-                    variant={'h5'}
-                >
-                    If you liked this {str === 'tv' ? 'Tv Series' : 'Movie'}
-                </Typography>
-                <Box className={styles.gridList}>
-                    {mediaList}
-                </Box>
-            </Paper>            
-        </div>
-    )
 }
 
 export default Recommendations;
