@@ -212,7 +212,7 @@ function Main(props) {
             <li className={classes.listItem}>&#9679;<span className={classes.tab}>Status: {item.status}</span></li>
             {for_tv}
         </ul>
-        networks = item.networks
+        networks = (str === 'tv' ? item.networks : item.production_companies)
     }
 
     const share = () => {
@@ -316,7 +316,7 @@ function Main(props) {
                                     Networks
                                 </Typography>
                                 <div className={classes.logoList}>
-                                    {(networks || []).map((network, key) => (
+                                    {(networks || []).slice(0,4).map((network, key) => (
                                         <div className={classes.network}>
                                             <div style={{backgroundColor: 'white', padding: '0px 6px 6px 6px', borderRadius: '6px',}}>
                                                 <img 
