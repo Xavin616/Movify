@@ -103,8 +103,8 @@ function ItemCast(props) {
             })
     }, [url])
 
-    if (cast){
-        let casted = cast.slice(0, 10)
+    if ((cast || []).length !== 0) {
+        let casted = cast.slice(0, 10);
         content= 
             casted.map((cast, key)=>
             <Grid item xs={12} sm={6} md={3}>
@@ -117,24 +117,27 @@ function ItemCast(props) {
                     classes={classes}
                 /> 
             </Grid>
-            )   
+        )   
+        return (
+            <div>
+                <Paper className={styles.paper}>
+                    <Typography 
+                        className={styles.headline}
+                        variant={'h5'}
+                    >
+                        Cast & Crew
+                    </Typography>
+                    <Box className={styles.gridList}>
+                        {content}
+                    </Box>
+                </Paper>
+            </div>
+        )
+    } else if ((cast || []).length === 0) {
+        return (
+            <></>
+        )
     }
-
-    return (
-        <div>
-            <Paper className={styles.paper}>
-                <Typography 
-                    className={styles.headline}
-                    variant={'h5'}
-                >
-                    Cast & Crew
-                </Typography>
-                <Box className={styles.gridList}>
-                    {content}
-                </Box>
-            </Paper>
-        </div>
-    )
 }
 
 export default ItemCast

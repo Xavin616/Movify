@@ -1,10 +1,12 @@
 import React from 'react';
 import { Paper, Button, Card, CardMedia, Typography } from '@material-ui/core';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core';
 import axios from 'axios';
 import { genrate } from '../subcomponents/Query';
+import ShareIcon from '@material-ui/icons/Share'
 
 const useStyles = makeStyles((theme) => ({
     paperContainer: {
@@ -31,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
         float: 'right',
         margin: '0 auto',
         minWdith: 260,
-        maxWidth: 300,
+        maxWidth: 310,
         border: 'none',
         backgroundColor: 'transparent',
         // eslint-disable-next-line
@@ -96,10 +98,14 @@ const useStyles = makeStyles((theme) => ({
         textTransform: 'none',
         fontSize: '0.95em',
         borderRadius: '6px',
+        padding: '5px 12px 5px 7px',
         fontFamily: 'Source Sans Pro, sans-serif',
         '&:hover': {
             backgroundColor: 'cyan',
         }
+    },
+    icon: {
+        marginRight: 2,
     },
     tag: {
         marginTop: -6,
@@ -143,6 +149,23 @@ const useStyles = makeStyles((theme) => ({
         padding: '8px 5px 0px 5px',
         overflow: 'scroll auto',
     },
+    logoList: {
+        padding: '0px 10px 10px 10px',
+        display: 'flex',
+    },
+    networks:{
+        width: '40%',
+    },
+    network:{
+        borderRadius: '15px',
+        textAlign: 'center',
+        margin: '0px 30px 10px 0px',
+    },
+    overvied:{
+        fontWeight: 'bolder',
+        margin: '15px 0px 10px 0px',
+        fontFamily: 'Source Sans Pro, sans-serif',
+    },
 }))
 
 function Main(props) {
@@ -160,9 +183,9 @@ function Main(props) {
     let title;
     let tag;
     let for_tv;
+    let networks;
 
     const [item, setItem] = useState(null)
-
     useEffect(() => {
         axios.get(url)
             .then(response => {
@@ -189,6 +212,34 @@ function Main(props) {
             <li className={classes.listItem}>&#9679;<span className={classes.tab}>Status: {item.status}</span></li>
             {for_tv}
         </ul>
+        networks = item.networks
+    }
+
+    const sharefiles = () => {
+        if (item) {
+            let shareImage = "https://image.tmdb.org/t/p/original" + item.poster_path
+            let shareTitle = item.title;
+            let shareText = item.tagline;
+            let shareUrl = document.location.href;
+
+            const files = [shareImage]
+            if (navigator.canShare && navigator.canShare({
+                files: files,
+            })) {
+                navigator.share({
+                    'title': shareTitle,
+                    'text': shareText,
+                    'url': shareUrl,
+                    'files': files,
+                })
+                .then(() => console.log("Successfully Shared!"))
+                .catch((error) => console.log('Error:', error))
+            } else {
+                console.log("Web Share is not available on your Browser!")
+            }
+        } else {
+            alert("Could not Share!")
+        }
     }
 
     return (
@@ -198,7 +249,7 @@ function Main(props) {
                     backgroundImage: `url(${img_url})`, 
                     backgroundRepeat: 'no-repeat', 
                     backgroundSize: 'cover',
-                    backgroundColor: 'rgb(32 32 32 / 93%)',
+                    backgroundColor: 'rgb(20 48 48 / 85%)',
                     backgroundBlendMode: 'multiply',
                     backgroundPosition: '100% 0%',
                 }} 
@@ -223,22 +274,51 @@ function Main(props) {
                             <div className={classes.btngrp}>
                                 <a href='#trailer'>
                                     <Button className={classes.btn} variant='contained'>
-                                        <PlayArrowIcon />
+                                        <PlayArrowIcon className={classes.icon}/>
                                         Trailers
                                     </Button>
                                 </a>
                                 <a href='#download'>
                                     <Button className={classes.btn} variant='contained'>
+                                        <GetAppIcon className={classes.icon}/>
                                         Download
                                     </Button>
                                 </a>
+                                <Button onClick={sharefiles} className={classes.btn} variant='contained'>
+                                    <ShareIcon className={classes.icon}/>
+                                    Share
+                                </Button>
                             </div>
                             <div className={classes.properties}>
                                 {properties}
                             </div>
                             <Typography className={classes.overview} variant={'body1'}>
-                                {content}
+                                {(content || []).slice(0, 415)}...
                             </Typography>
+                            <div className={classes.networks}>
+                                <Typography className={classes.overvied} variant={'body1'}>
+                                    Networks
+                                </Typography>
+                                <div className={classes.logoList}>
+                                    {(networks || []).map((network, key) => (
+                                        <div className={classes.network}>
+                                            <div style={{backgroundColor: 'white', padding: '0px 6px 6px 6px', borderRadius: '6px',}}>
+                                                <img 
+                                                    height='25px'
+                                                    src={"https://image.tmdb.org/t/p/w154"+network.logo_path} 
+                                                    alt="networks"
+                                                    style={{
+                                                        borderRadius: '2.5px',
+                                                        backgroundColor: 'transparent', marginTop: 11,}}
+                                                />
+                                            </div>
+                                            <Typography style={{fontSize: '1.1em', fontFamily: 'Source Sans Pro, sans-serif',}}>
+                                                {network.name}
+                                            </Typography>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

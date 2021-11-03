@@ -40,9 +40,9 @@ const useStyles = makeStyles((theme) => ({
 
 const useCardStyles = makeStyles((theme) => ({
     root: {
-        width: 180,
+        width: 170,
         height: 94+'%',
-        margin: '0px 0px 22px 0px',
+        margin: '0px 0px 22px 5px',
         backgroundColor: '#060806',
         border: 'none',
         transition: '0.5s',
