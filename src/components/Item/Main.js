@@ -216,27 +216,19 @@ function Main(props) {
     }
 
     const sharefiles = () => {
-        if (item) {
-            let shareImage = "https://image.tmdb.org/t/p/original" + item.poster_path
+        if (navigator.share && item) {
+            //let shareImage = "https://image.tmdb.org/t/p/original" + item.poster_path
             let shareTitle = item.title;
             let shareText = item.tagline;
             let shareUrl = document.location.href;
 
-            const files = [shareImage]
-            if (navigator.canShare && navigator.canShare({
-                files: files,
-            })) {
                 navigator.share({
                     'title': shareTitle,
                     'text': shareText,
                     'url': shareUrl,
-                    'files': files,
                 })
                 .then(() => console.log("Successfully Shared!"))
                 .catch((error) => console.log('Error:', error))
-            } else {
-                console.log("Web Share is not available on your Browser!")
-            }
         } else {
             alert("Could not Share!")
         }
