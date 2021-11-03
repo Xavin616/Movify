@@ -215,13 +215,12 @@ function Main(props) {
         networks = item.networks
     }
 
-    const sharefiles = () => {
+    const share = () => {
         if (navigator.share && item) {
             //let shareImage = "https://image.tmdb.org/t/p/original" + item.poster_path
             let shareTitle = item.title;
             let shareText = item.tagline;
             let shareUrl = document.location.href;
-
                 navigator.share({
                     'title': shareTitle,
                     'text': shareText,
@@ -231,6 +230,31 @@ function Main(props) {
                 .catch((error) => console.log('Error:', error))
         } else {
             alert("Could not Share!")
+        }
+    }
+
+    const sharefiles = () => {
+        if (item) {
+            let shareTitle = item.title;
+            let shareText = item.tagline;
+            let shareUrl = document.location.href;
+            const files = ["https://image.tmdb.org/t/p/original" + item.poster_path]
+            if (navigator.canShare && navigator.canShare({
+                files: files
+            })) {
+                navigator.share({
+                    title: shareTitle,
+                    text: shareText,
+                    url: shareUrl,
+                    files: files,
+                })
+                .then(() => console.log("Successfully Shared!"))
+                .catch((error) => console.log('Error:', error))
+            } else {
+                alert('No navigator.canShare!')
+            } 
+        } else {
+            alert('Not loaded')
         }
     }
 
@@ -271,7 +295,7 @@ function Main(props) {
                                     </Button>
                                 </a>
                                 <a href='#download'>
-                                    <Button className={classes.btn} variant='contained'>
+                                    <Button onClick={share} className={classes.btn} variant='contained'>
                                         <GetAppIcon className={classes.icon}/>
                                         Download
                                     </Button>
