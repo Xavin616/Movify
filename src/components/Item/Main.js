@@ -335,7 +335,7 @@ function Main(props) {
                                         <div className={classes.network}>
                                             <div style={{backgroundColor: 'white', padding: '0px 6px 6px 6px', borderRadius: '6px',}}>
                                                 <img 
-                                                    height={(str === 'movie' ? '50px': '28px')}
+                                                    height={(str === 'movie' ? '25px': '22px')}
                                                     src={"https://image.tmdb.org/t/p/w154"+network.logo_path} 
                                                     alt="networks"
                                                     style={{
@@ -343,7 +343,7 @@ function Main(props) {
                                                         backgroundColor: 'transparent', marginTop: 11,}}
                                                 />
                                             </div>
-                                            <Typography style={{fontSize: '1.1em', fontFamily: 'Source Sans Pro, sans-serif',}}>
+                                            <Typography style={{fontSize: '0.7em', fontFamily: 'Source Sans Pro, sans-serif',}}>
                                                 {network.name}
                                             </Typography>
                                         </div>

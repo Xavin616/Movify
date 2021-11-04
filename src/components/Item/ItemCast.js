@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) =>({
         height: 250,
         backgroundColor: 'transparent',
         color: 'white',
-        margin: '10px 25px 12px 5px ',
+        margin: '10px 30px 12px 5px ',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
             margin: '10px 15px 12px 5px ',
