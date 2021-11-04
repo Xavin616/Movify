@@ -88,9 +88,10 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     btngrp: {
-        marginTop: '10px ',
+        marginTop: '5px ',
     },
     btn: {
+        marginTop: 5,
         marginLeft: 10,
         marginRight: 5,
         backgroundColor: 'red',
@@ -152,19 +153,33 @@ const useStyles = makeStyles((theme) => ({
     logoList: {
         padding: '0px 10px 10px 10px',
         display: 'flex',
+        flexWrap: 'wrap',
+        // eslint-disable-next-line
+        ['@media (max-width: 400px)']: {
+            textAlign: 'center',
+            justifyContent: 'center',
+        },
     },
     networks:{
-        width: '40%',
+        width: '100%',
     },
     network:{
         borderRadius: '15px',
         textAlign: 'center',
         margin: '0px 30px 10px 0px',
+        // eslint-disable-next-line
+        ['@media (max-width: 400px)']: {
+            margin: '0px 10px 10px 10px',
+        },
     },
     overvied:{
         fontWeight: 'bolder',
         margin: '15px 0px 10px 0px',
         fontFamily: 'Source Sans Pro, sans-serif',
+        // eslint-disable-next-line
+        ['@media (max-width: 400px)']: {
+            textAlign: 'center',
+        },
     },
 }))
 
@@ -233,7 +248,7 @@ function Main(props) {
         }
     }
 
-    const sharefiles = () => {
+    /*const sharefiles = () => {
         if (item) {
             let shareTitle = item.title;
             let shareText = item.tagline;
@@ -256,7 +271,7 @@ function Main(props) {
         } else {
             alert('Not loaded')
         }
-    }
+    }*/
 
     return (
         <div>
@@ -295,12 +310,12 @@ function Main(props) {
                                     </Button>
                                 </a>
                                 <a href='#download'>
-                                    <Button onClick={share} className={classes.btn} variant='contained'>
+                                    <Button className={classes.btn} variant='contained'>
                                         <GetAppIcon className={classes.icon}/>
                                         Download
                                     </Button>
                                 </a>
-                                <Button onClick={sharefiles} className={classes.btn} variant='contained'>
+                                <Button onClick={share} className={classes.btn} variant='contained'>
                                     <ShareIcon className={classes.icon}/>
                                     Share
                                 </Button>
@@ -316,11 +331,11 @@ function Main(props) {
                                     Networks
                                 </Typography>
                                 <div className={classes.logoList}>
-                                    {(networks || []).slice(0,4).map((network, key) => (
+                                    {(networks || []).slice(0,3).map((network, key) => (
                                         <div className={classes.network}>
                                             <div style={{backgroundColor: 'white', padding: '0px 6px 6px 6px', borderRadius: '6px',}}>
                                                 <img 
-                                                    height='25px'
+                                                    height={(str === 'movie' ? '50px': '28px')}
                                                     src={"https://image.tmdb.org/t/p/w154"+network.logo_path} 
                                                     alt="networks"
                                                     style={{
