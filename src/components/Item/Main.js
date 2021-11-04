@@ -88,10 +88,10 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     btngrp: {
-        marginTop: '5px ',
+        marginTop: '2.5px ',
     },
     btn: {
-        marginTop: 5,
+        marginTop: 7.5,
         marginLeft: 10,
         marginRight: 5,
         backgroundColor: 'red',
@@ -328,7 +328,7 @@ function Main(props) {
                             </Typography>
                             <div className={classes.networks}>
                                 <Typography className={classes.overvied} variant={'body1'}>
-                                    Networks
+                                    {(str === 'tv' ? 'Networks' : 'Production Companies')}
                                 </Typography>
                                 <div className={classes.logoList}>
                                     {(networks || []).slice(0,3).map((network, key) => (
