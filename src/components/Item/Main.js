@@ -233,7 +233,7 @@ function Main(props) {
     const share = () => {
         if (navigator.share && item) {
             //let shareImage = "https://image.tmdb.org/t/p/original" + item.poster_path
-            let shareTitle = item.title;
+            let shareTitle = item.original_name || item.original_title;
             let shareText = item.tagline;
             let shareUrl = document.location.href;
                 navigator.share({
@@ -343,7 +343,7 @@ function Main(props) {
                                                         backgroundColor: 'transparent', marginTop: 11,}}
                                                 />
                                             </div>
-                                            <Typography style={{fontSize: '0.7em', fontFamily: 'Source Sans Pro, sans-serif',}}>
+                                            <Typography style={{fontSize: '0.85em', marginTop: 5, fontFamily: 'Source Sans Pro, sans-serif',}}>
                                                 {network.name}
                                             </Typography>
                                         </div>

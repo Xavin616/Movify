@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '11.5px 4px 4px 4px',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
-            fontSize: '1.2em',
+            fontSize: '1.35em',
             margin: '0px 0px 0px 8px',
         },
     },
