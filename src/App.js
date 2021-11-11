@@ -1,7 +1,8 @@
 import React from 'react';
 import Header from './components/Header/index';
-import Body from './components/Body/index'
-import Category from './components/Category/index'
+import Footer from './components/Footer/index';
+import Body from './components/Body/index';
+import Category from './components/Category/index';
 import ItemPage from './components/Item/index';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css';
@@ -44,6 +45,7 @@ function App() {
                 <ItemPage />
               </Route>
             </Switch>
+            <Footer/>
         </div>
       </ThemeProvider>
     </Router>

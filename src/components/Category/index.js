@@ -376,7 +376,7 @@ function Category(props) {
                     <Accordion>
                         <AccordionSummary expandIcon={<ExpandMoreIcon style={{color: 'white',}} />}>
                             <Typography component={'h4'} variant={'h6'} className={classes.header}>
-                                Search {(media === 'tv' ? 'Tv Shows' : media)}
+                                Search {(media === 'tv' ? 'Tv Shows' : 'Movies')}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
