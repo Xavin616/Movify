@@ -169,11 +169,11 @@ function Catalogue(props) {
     
     return (
         <div className={styles.mainBody}>
-                <Paper className={styles.paper}>
-                         <div className={styles.grid}>
-                            {content} 
-                         </div>
-                     </Paper>
+            <Paper className={styles.paper}>
+                <div className={styles.grid}>
+                    {content} 
+                </div>
+            </Paper>
         </div>
     )
 };

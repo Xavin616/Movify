@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
         ['@media (max-width:400px)']: {
             fontSize: '1.25em',
             fontWeight: 'bold',
-            marginTop: 18,
+            marginTop: 12,
         },
         '&:hover': {
             color: 'cyan',
