@@ -230,6 +230,8 @@ function Main(props) {
         networks = (str === 'tv' ? item.networks : item.production_companies)
     }
 
+
+    //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
     const share = () => {
         if (navigator.share && item) {
             //let shareImage = "https://image.tmdb.org/t/p/original" + item.poster_path
