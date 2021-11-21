@@ -231,7 +231,7 @@ function Main(props) {
     }
 
 
-    //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
+    //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
     const share = () => {
         if (navigator.share && item) {
             //let shareImage = "https://image.tmdb.org/t/p/original" + item.poster_path
