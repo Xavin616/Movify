@@ -9,6 +9,7 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   padding: 0;
   margin: 0;
+  position: relative;
   background: linear-gradient(to top, black 50%,rgb(17, 70, 82));
 }
 
@@ -27,6 +28,32 @@ a {
   background-color: darkcyan;
 }
 
+.App {
+  position: relative;
+}
+
+#donate {
+  position: fixed;
+  z-index: 100;
+  right: 50px;
+  bottom: 50px;
+  width: 100px,
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  0.3% { transform: translate(-1px, -2px) rotate(-1deg); }
+  0.6% { transform: translate(-3px, 0px) rotate(1deg); }
+  0.9% { transform: translate(3px, 2px) rotate(0deg); }
+  1.2% { transform: translate(1px, -1px) rotate(1deg); }
+  1.5% { transform: translate(-1px, 2px) rotate(-1deg); }
+  1.8% { transform: translate(-3px, 1px) rotate(0deg); }
+  2.1% { transform: translate(3px, 1px) rotate(-1deg); }
+  2.4% { transform: translate(-1px, -1px) rotate(1deg); }
+  2.7% { transform: translate(1px, 2px) rotate(0deg); }
+  3% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
 .card-image {
   height: auto;
 }
@@ -41,5 +68,12 @@ a {
   .MuiAccordionSummary-content {
     display: block;
     margin: 8px 0;
+  }
+
+  #donate {
+    transform: scale(0.9);
+    right: 10px;
+    bottom: 15px;
+    width: 100px,
   }
 }

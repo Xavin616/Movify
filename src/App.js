@@ -4,6 +4,7 @@ import Footer from './components/Footer/index';
 import Body from './components/Body/index';
 import Category from './components/Category/index';
 import ItemPage from './components/Item/index';
+import Donate from './components/Donate';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -45,6 +46,7 @@ function App() {
                 <ItemPage />
               </Route>
             </Switch>
+            <Donate />
             <Footer/>
         </div>
       </ThemeProvider>
