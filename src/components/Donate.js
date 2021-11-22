@@ -4,7 +4,7 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        padding: 15,
+        padding: 10,
         border: '1px solid black',
         borderRadius: '10px',
         backgroundColor: 'yellow',
@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
         },
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
-            width: 165,
-            height: 50,
+            width: 150,
+            height: 40,
             padding: 5,
         },
     },
@@ -38,9 +38,9 @@ const useStyles = makeStyles((theme) => ({
         textTransform: 'none',
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
-            fontSize: '1.6em',
+            fontSize: '1.35em',
             fontWeight: '400',
-            marginBottom: 2,
+            marginBottom: -2,
         },
     },
 }))
