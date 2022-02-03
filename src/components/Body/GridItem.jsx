@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/styles';
 const useStyles = makeStyles((theme) => ({
     paper: {
         borderRadius: 0,
-        height: 'auto',
+        height: '100%',
         padding: '15px 8px 8px 12px',
         backgroundColor: '#0000009e',
         backgroundBlendMode: 'multiply',
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     },
     gridList: {
         width: 100 + '%',
-        height: 'max-content',
+        maxHeight: '342px',
         display: 'flex',
         padding: '2px 5px 0px 15px',
         overflow: 'scroll hidden',

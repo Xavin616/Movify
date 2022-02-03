@@ -100,7 +100,6 @@ const DownloadButton = (props) => {
 function Download(props) {
     const name = props.name;
     const media = props.media;
-    
 
     let classes = useStyles()
     let colors = ['#ff003c', 'green', 'lightblue', 'yellow', 'cyan']
@@ -109,33 +108,33 @@ function Download(props) {
         {
             name: 'O2tvSeries',
             color: colors[2],
-            link: `https://cse.google.com/cse?oe=utf8&ie=utf8&source=uds&q=${name.slice(0,18)}&safe=off&sort=&cx=008563300698790025010:eex5tr6ameu&start=0`,
+            link: `https://cse.google.com/cse?oe=utf8&ie=utf8&source=uds&q=${name}&safe=off&sort=&cx=008563300698790025010:eex5tr6ameu&start=0`,
         },
         {
             name: 'TFPDL',
             color: '#1E9DBF',
             //logo: 'https://i.imgur.com/7gSsFbn.png',
-            link: `https://tfp.is/?s=${name.slice(0,18)}`,
+            link: `https://tfp.is/?s=${name}`,
         },
         
         {
             name:'NetNaija',
             color: colors[1],
-            link: `https://thenetnaija.com/search?folder=videos&t=${name.slice(0,18)}`,
+            link: `https://thenetnaija.com/search?folder=videos&t=${name}`,
         },
         {
             name: 'Spacemov',
-            link: `https://spacemov.ws/?s=${name.slice(0,18)}`,
+            link: `https://spacemov.ws/?s=${name}`,
         },
         {
             name: 'Nkiri',
             color: colors[3],
-            link: `https://nkiri.com/?s=${name.slice(0,18)}&post_type=post`,
+            link: `https://nkiri.com/?s=${name}&post_type=post`,
         },
         {
             name:'FZ Series',
             color: colors[0],
-            link: `https://mobiletvshows.net/search.php?search=${name.slice(0,18)}&beginsearch=Search&vsearch=&by=series`,
+            link: `https://mobiletvshows.net/search.php?search=${name}&beginsearch=Search&vsearch=&by=series`,
         }
     ]
     
@@ -143,30 +142,30 @@ function Download(props) {
             {
                 name: 'HD Mania',
                 color: colors[2],
-                link: `https://cse.google.com/cse?oe=utf8&ie=utf8&source=uds&q=${name.slice(0,18)}&safe=off&sort=&cx=008563300698790025010:eex5tr6ameu&start=0`,
+                link: `https://cse.google.com/cse?oe=utf8&ie=utf8&source=uds&q=${name}&safe=off&sort=&cx=008563300698790025010:eex5tr6ameu&start=0`,
             },    
             {
                 name: 'TFPDL',
                 color: colors[0],
-                link: `https://tfp.is/?s=${name.slice(0,18)}`,
+                link: `https://tfp.is/?s=${name}`,
             },
             {
                 name:'NetNaija',
                 color: colors[1],
-                link: `https://thenetnaija.com/search?folder=videos&t=${name.slice(0,18)}`,
+                link: `https://thenetnaija.com/search?folder=videos&t=${name}`,
             },
             {
                 name: 'Spacemov',
-                link: `https://spacemov.ws/?s=${name.slice(0,18)}`,
+                link: `https://spacemov.ws/?s=${name}`,
             },
             {
                 name: 'Nkiri',
                 color: colors[2],
-                link: `https://nkiri.com/?s=${name.slice(0,18)}&post_type=post`,
+                link: `https://nkiri.com/?s=${name}&post_type=post`,
             },
             {
                 name:'ToxicWap', 
-                link: `https://toxicwap.us/?s=${name.slice(0,18)}`,
+                link: `https://toxicwap.us/?s=${name}`,
             },
             
         ]

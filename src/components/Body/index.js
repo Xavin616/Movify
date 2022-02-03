@@ -26,9 +26,10 @@ const useCardStyles = makeStyles((theme) => ({
         margin: '0px 7.5px',
         //minWidth: 162,
         width: 160,
-        height: 95.5+'%',
+        height: 95.2+'%',
         backgroundColor: '#060806',
         border: 'none',
+        paddingBottom: 10,
         // eslint-disable-next-line
         ['@media (max-width:400px)']: {
             width: 130,
