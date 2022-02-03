@@ -296,6 +296,7 @@ function Main(props) {
                                 className={classes.media}
                                 image={image}
                                 component='img'
+                                alt={title}
                             />
                         </Card>
                     </div>

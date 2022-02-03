@@ -15,6 +15,7 @@ function CustomCard(props){
                 <Card className={classes.root}>
                     <Link to={url}>
                         <CardMedia
+                            alt={title}
                             className={classes.media}
                             image={image || load}
                             component="img"
